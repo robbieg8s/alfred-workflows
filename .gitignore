@@ -1,0 +1,10 @@
+# Built artifacts in general
+dist/
+# pnpm caches
+node_modules/
+# Links to installed workflows
+workflows/*/installation
+# Built workflow exports
+workflows/*/*.alfredworkflow
+# Standard tmp
+/tmp/

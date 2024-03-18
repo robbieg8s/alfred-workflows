@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>org.halfyak.alfredapp.example-workflow</string>
+	<key>description</key>
+	<string>Example Description</string>
+	<key>name</key>
+	<string>Example Name</string>
+	<key>version</key>
+	<string></string>
+</dict>
+</plist>

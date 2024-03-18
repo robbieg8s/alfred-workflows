@@ -1,0 +1,16 @@
+{
+  "name": "@halfyak/alfred-workflows-jxa",
+  "version": "1.0.0",
+  "description": "Types and libraries for Alfred Workflows using JXA/ObjC Bridge from Typescript",
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "Robbie Gates",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "0.20.1",
+    "typescript": "5.3.3"
+  },
+  "main": "src/index.ts"
+}

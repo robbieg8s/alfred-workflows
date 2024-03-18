@@ -1,0 +1,30 @@
+{
+  "name": "@halfyak/alfred-workflows-tools",
+  "version": "1.0.0",
+  "description": "Opinionated tooling for for Alfred Workflows using Typescript/JXA/Javascript/ObjC Bridge",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm tsc && pnpm bundle",
+    "bundle": "bin/bundle.mjs",
+    "tsc": "tsc --noEmit",
+    "test": "bin/test.sh"
+  },
+  "bin": {
+    "bundle-workflow": "./dist/bundle-workflow.js",
+    "export-workflow": "./dist/export-workflow.js",
+    "import-workflow": "./dist/import-workflow.js",
+    "link-workflow": "./dist/link-workflow.js",
+    "update-workflow": "./dist/update-workflow.js"
+  },
+  "keywords": [],
+  "author": "Robbie Gates",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "20.11.24",
+    "tsx": "4.7.1",
+    "typescript": "5.3.3"
+  },
+  "dependencies": {
+    "esbuild": "0.20.1"
+  }
+}

@@ -8,6 +8,7 @@ The workflows included are
 The workflows and all tooling are written in typescript. The workflows execute
 using the macOS `osascript` javascript interpreter, the tooling executes using
 `node`. The associated toolchain is
+
 - [Esbuild](https://esbuild.github.io) for transpilation and bundling of the
   workflows and tooling
 - [Asdf](https://asdf-vm.com) for version management of tools
@@ -25,6 +26,7 @@ runnable in a suitably configured docker container also, but this is future
 work.
 
 The tooling workflow has five components:
+
 - bundle-workflow to transpile for osascript
 - export-workflow to build distributable workflows
 - import-workflow to copy changes from Alfred UI to git workspace

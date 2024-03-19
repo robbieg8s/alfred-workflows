@@ -3,12 +3,11 @@ import { DetailedError, executeProcess } from "@halfyak/alfred-workflows-jxa";
 // This global is declared (globally) in "@halfyak/alfred-workflows-jxa"
 run = (argv: string[]) => {
   try {
-    ObjC.import("stdlib");
-
-    // Note that calling getenv from stdlib will crash if the variable is unset.
-    // This should be safe with HOME, but if not, as a workaround one can call
-    // setenv with overwrite false to set a default to make the read safe.
-    const safariHistoryDb = `${$.getenv("HOME")}/Library/Safari/History.db`;
+    const home = $.NSProcessInfo.processInfo.environment.valueForKey("HOME").js;
+    if (undefined === home) {
+      throw new Error("Environment variable HOME not found");
+    }
+    const safariHistoryDb = `${home}/Library/Safari/History.db`;
     const whereClause = () =>
       0 == argv.length
         ? ""

@@ -58,7 +58,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Searching Safari History DBs</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>

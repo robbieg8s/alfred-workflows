@@ -35,6 +35,10 @@ run = (argv: string[]) => {
         0,
         $.NSLocale.currentLocale,
       );
+    const formatDate = (time: number) =>
+      dateFormatter.stringFromDate(
+        $.NSDate.dateWithTimeIntervalSinceReferenceDate(time),
+      ).js;
     // When sqlite finds nothing in JSON mode, it emits nothing, as opposed to an empty list.
     const items =
       "" === jsonResult
@@ -48,8 +52,8 @@ run = (argv: string[]) => {
           ).map(({ title, url, visit_time }) => ({
             title,
             // osascript does not appear to provide the standard URL class. We
-            // could use NSURL, but for this parsing, a string split will do.
-            subtitle: `${url.split("/")[2]} - ${dateFormatter.stringFromDate($.NSDate.dateWithTimeIntervalSinceReferenceDate(visit_time)).js}`,
+            // could use NSURL, but for now this parsing, a string split, is ok.
+            subtitle: `${url.split("/")[2]} - ${formatDate(visit_time)}`,
             arg: url,
           }));
     return JSON.stringify({ items });

@@ -3,10 +3,7 @@ import { DetailedError, executeProcess } from "@halfyak/alfred-workflows-jxa";
 // This global is declared (globally) in "@halfyak/alfred-workflows-jxa"
 run = (argv: string[]) => {
   try {
-    const home = $.NSProcessInfo.processInfo.environment.valueForKey("HOME").js;
-    if (undefined === home) {
-      throw new Error("Environment variable HOME not found");
-    }
+    const home = $.NSHomeDirectory().js;
     const safariHistoryDb = `${home}/Library/Safari/History.db`;
     const whereClause = () =>
       0 == argv.length

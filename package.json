@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Some Alfred Workflows built using Typescript/JXA/Javascript/ObjC Bridge",
   "scripts": {
+    "bootstrap-workflow": "pnpm exec ./tools/dist/bootstrap-workflow.js",
     "build-tools": "cd tools && pnpm build",
     "eslint": "eslint --format compact .",
     "prettier": "prettier --write ."

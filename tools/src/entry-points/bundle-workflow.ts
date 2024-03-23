@@ -11,6 +11,9 @@ import { kDist, kRaw } from "../fs-layout.ts";
 runCli(async () => {
   // Start clean
   await fs.rm(kDist, { force: true, recursive: true });
+  // Normally esbuild will make the output directory, but it doesn't if there
+  // are no source scripts, which happens in the import flow, so make it here.
+  await fs.mkdir(kDist);
 
   // Firstly, transpile/bundle the src ts into kDist. The entry points are
   // `scripts` in Alfred terminology, called using External Script configuration

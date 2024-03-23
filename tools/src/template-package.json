@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@halfyak/alfred-workflows-jxa": "workspace:"
+  },
+  "devDependencies": {
+    "@halfyak/alfred-workflows-tools": "workspace:",
+    "typescript": "5.3.3"
+  }
+}

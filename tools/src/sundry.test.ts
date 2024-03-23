@@ -5,6 +5,7 @@ import { describe, it } from "node:test";
 import {
   arrayBufferToString,
   encatchulate,
+  getEnvOrThrow,
   partition,
   shQuote,
   splitArrayBufferOn,
@@ -53,7 +54,17 @@ describe("encatchulate", () => {
   });
 });
 
-describe.only("partition", () => {
+describe("getEnvOrThrow", () => {
+  it("gets defined variables", () => {
+    // POSIX says the system "shall initialize this variable"
+    assert.equal(getEnvOrThrow("HOME"), process.env["HOME"]);
+  });
+  it("throws for missing variables", () => {
+    assert.throws(() => getEnvOrThrow(crypto.randomUUID()));
+  });
+});
+
+describe("partition", () => {
   const isEven = (n: number) => 0 === n % 2;
   it("partitions", () => {
     // I want to ensure this syntax works

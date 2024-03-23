@@ -4,10 +4,14 @@
   <xsl:output method="text"/>
   <xsl:strip-space elements="*"/>
   <xsl:template match="/">
-    <!-- Find the keys we care about - bundleid, name, version - where the following value node
-      is a non-empty <string> element. -->
+    <!--
+      Find the keys we care about where the following value node is a non-empty <string> element.
+      This list is coupled to the definition of {@link InfoPlist} in {@link ./info-plist.ts}. If
+      it gets more complex, we should use parameters or configuration to manage it, or recast this
+      stylesheet as a general purpose plist -> JSON converter.
+    -->
     <xsl:for-each select="plist/dict/key[
-        (text()[.='bundleid' or .='name' or .='version']) and
+        (text()[.='bundleid' or .='name' or .='createdby' or .='description' or .='version']) and
         following-sibling::*[1][self::string and text()]
         ]">
       <!-- key -->

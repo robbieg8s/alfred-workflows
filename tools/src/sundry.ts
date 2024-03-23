@@ -22,6 +22,14 @@ export const encatchulate = async <Parameters extends unknown[], Return>(
   ...args: Parameters
 ): Promise<Return> => (async () => callable(...args))();
 
+export const getEnvOrThrow = (name: string) => {
+  const value = process.env[name];
+  if (undefined === value) {
+    throw new Error(`Environment variable '${name}' is not set`);
+  }
+  return value;
+};
+
 export const maybeEnoent = async <Parameters extends unknown[], Return>(
   callable: (...params: Parameters) => Promise<Return>,
   ...args: Parameters

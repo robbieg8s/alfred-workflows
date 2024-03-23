@@ -13,14 +13,23 @@ export const installationFilenames = async () =>
   );
 export const rawFilenames = async () => await fs.readdir(kRaw);
 
-const helpShCommand = (pnpmScript: string) =>
-  `:; ( cd ${shQuote(path.resolve())} && pnpm ${pnpmScript}; )`;
+const makeHelp =
+  (pnpmScript: string) =>
+  (options: { cd?: string[]; extra?: string[] } = {}) => {
+    const cd = path.resolve(...(options.cd ?? []));
+    const commands = [
+      `cd ${shQuote(cd)}`,
+      ...(options.extra ?? []),
+      `pnpm ${pnpmScript}`,
+    ];
+    return `:; ( ${commands.join(" && ")} ; )`;
+  };
 
-export const helpBundleWorkflow = () => helpShCommand("bundle-workflow");
-export const helpExportWorkflow = () => helpShCommand("export-workflow");
-export const helpImportWorkflow = () => helpShCommand("import-workflow");
-export const helpLinkWorkflow = () => helpShCommand("link-workflow");
-export const helpUpdateWorkflow = () => helpShCommand("update-workflow");
+export const helpBundleWorkflow = makeHelp("bundle-workflow");
+export const helpExportWorkflow = makeHelp("export-workflow");
+export const helpImportWorkflow = makeHelp("import-workflow");
+export const helpLinkWorkflow = makeHelp("link-workflow");
+export const helpUpdateWorkflow = makeHelp("update-workflow");
 
 export const verifyBundleid = async (
   thisDir: string,

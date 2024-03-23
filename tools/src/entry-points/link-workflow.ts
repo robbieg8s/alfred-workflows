@@ -3,11 +3,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+import { listCurrentWorkflows } from "../alfred.ts";
 import { runCli, reportableError, reportAs } from "../cli.ts";
 import { kInstallation, kRaw } from "../fs-layout.ts";
-import { jsonParse, jsonTypeOf, toJsonObject, toJsonString } from "../json.ts";
 import { readInfoPlist, verifySymlink } from "../info-plist.ts";
-import { encatchulate, partition, shQuote } from "../sundry.ts";
+import { shQuote } from "../sundry.ts";
 import {
   helpLinkWorkflow,
   helpUpdateWorkflow,
@@ -54,79 +54,13 @@ runCli(async () => {
     );
   } else {
     // Find and link the matching workflow
-
-    // We need to search through some Alfred configuration to find the workflows
-    const envHome = process.env["HOME"];
-    if (undefined === envHome) {
-      throw reportableError("Environment variable 'HOME' is not set");
-    }
-    const alfredPrefsFile = path.join(
-      envHome,
-      "Library/Application Support/Alfred/prefs.json",
-    );
-    const alfredPrefsData = await fs
-      .readFile(alfredPrefsFile)
-      .catch(reportAs(() => `Cannot read ${alfredPrefsFile}`));
-    const alfredPrefsJson = await encatchulate(
-      jsonParse,
-      alfredPrefsData.toString(),
-    ).catch(reportAs(() => `Failed to parse JSON from ${alfredPrefsFile}`));
-    const alfredPrefs = toJsonObject(alfredPrefsJson);
-    if (undefined === alfredPrefs) {
-      throw reportableError(
-        `Cannot parse ${alfredPrefsFile} to a JSON object, found ${jsonTypeOf(alfredPrefsJson)}`,
-      );
-    }
-    const alfredPrefsCurrent = alfredPrefs["current"];
-    if (undefined === alfredPrefsCurrent) {
-      throw reportableError(
-        `Failed to parse "current" from ${alfredPrefsFile}`,
-      );
-    }
-    const alfredPrefsCurrentString = toJsonString(alfredPrefsCurrent);
-    if (undefined === alfredPrefsCurrentString) {
-      throw reportableError(
-        `Property 'current' from ${alfredPrefsFile} was ${jsonTypeOf(alfredPrefsCurrent)} != string as expected`,
-      );
-    }
-    const alfredWorkflowsRoot = path.join(
-      alfredPrefsCurrentString,
-      "workflows",
-    );
-
-    const [fulfilled, rejected] = partition(
-      await Promise.allSettled(
-        (await fs.readdir(alfredWorkflowsRoot))
-          .map((dirName) => path.join(alfredWorkflowsRoot, dirName))
-          .map(async (target) => ({
-            target,
-            infoPlist: await readInfoPlist(target),
-          })),
-      ),
-      ({ status }) => status === "fulfilled",
-    );
-    // Notify but ignore bad workflows - we are relying on good exception text
-    // from the errors
-    rejected.forEach((settled) => {
-      // Help the typechecker out, without accidentally suppressing errors
-      const reason = "rejected" === settled.status ? settled.reason : settled;
-      console.log(`WARNING: ignoring corrupted workflow: ${reason}`);
-    });
+    const { workflows, warnings } = await listCurrentWorkflows();
+    // Notify but ignore bad workflows
+    warnings.forEach((warning) => console.log(warning));
 
     // Fetch the kRaw bundleid we are matching against.
     const rawInfoPlist = await readInfoPlist(kRaw);
 
-    const fulfilledValue = <T>(settled: PromiseSettledResult<T>) => {
-      if (settled.status === "fulfilled") {
-        return settled.value;
-      } else {
-        throw new Error(
-          `Cannot request value from ${settled.status} Promise: ${settled.reason}`,
-        );
-      }
-    };
-
-    const workflows = fulfilled.map(fulfilledValue);
     const matching = workflows.filter(
       ({ infoPlist }) => infoPlist.bundleid === rawInfoPlist.bundleid,
     );

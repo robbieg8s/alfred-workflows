@@ -1,28 +1,38 @@
 import fs from "node:fs/promises";
 import { Stats, BigIntStats } from "node:fs";
 import path from "node:path";
+
 import { maybeEnoent, splitArrayBufferOn, ProcessBuilder } from "./sundry.ts";
+
 import parseInfoPlistXsl from "./parse-info-plist.xsl";
 
 export const kInfoPlist = "info.plist";
 
 /**
- * Class for the fields of interest to this tooling in the Alfred `info.plist`
- * file.
+ * Class for the fields of interest in the Alfred `info.plist` file.
+ *
+ * The fields of this class here are coupled to the style sheet in {@link
+ * parse-info-plist.xsl}.
  */
 export class InfoPlist {
-  bundleid: string;
-  name: string;
-  version?: string;
+  constructor(
+    readonly bundleid: string,
+    readonly name: string,
+    readonly createdby?: string,
+    readonly description?: string,
+    readonly version?: string,
+  ) {}
 
-  constructor(bundleid: string, name: string, version?: string) {
-    this.bundleid = bundleid;
-    this.name = name;
-    this.version = version;
+  /**
+   * The name we use for the workflows repository directory.
+   */
+  repositoryName() {
+    return this.name.replaceAll(/[^\w]/g, "-").toLowerCase();
   }
 
   /**
    * The name we use for the installable Alfred workflow file.
+   * This is intended to be URL safe so it can be in a download link path.
    */
   exportName() {
     return this.name.replaceAll(/[^\w]/g, "_") + ".alfredworkflow";
@@ -43,7 +53,7 @@ const splitKeyValue = (keyValue: string) => {
     throw new Error(`no space in keyValue '${keyValue}'`);
   } else {
     // Note the space is in neither half
-    return [keyValue.slice(0, space), keyValue.slice(space + 1)];
+    return [keyValue.slice(0, space), keyValue.slice(space + 1)] as const;
   }
 };
 
@@ -140,15 +150,18 @@ export const readInfoPlist = async <T = never>(
       } catch (error) {
         return corruptXml(infoPlistPath, error);
       }
-      const { bundleid, name, version } = Object.fromEntries(
+      // This record type clarification triggers type errors if we miss a check
+      // below
+      const data: Record<string, string | undefined> = Object.fromEntries(
         splitArrayBufferOn(parsedXml, 0xa).map(splitKeyValue),
       );
-      if (!bundleid) {
+      const { bundleid, name, createdby, description, version } = data;
+      if (undefined === bundleid) {
         return missingField(infoPlistPath, "bundleid");
-      } else if (!name) {
+      } else if (undefined === name) {
         return missingField(infoPlistPath, "name");
       } else {
-        return new InfoPlist(bundleid, name, version);
+        return new InfoPlist(bundleid, name, createdby, description, version);
       }
     }
   }

@@ -6,7 +6,7 @@ import path from "node:path";
 
 import { runCli, reportableError, reportAs } from "../cli.ts";
 import { kInstallation, kDist } from "../fs-layout.ts";
-import { readInfoPlist } from "../info-plist.ts";
+import { readInfoPlist, verifySymlink } from "../info-plist.ts";
 import { shQuote } from "../sundry.ts";
 import { syncOutcomes, SyncAction } from "../sync.ts";
 import {
@@ -17,17 +17,6 @@ import {
   helpLinkWorkflow,
   verifyBundleid,
 } from "../workflow.ts";
-
-const verifySymlink = (
-  path: string,
-  lstat: { mode: number | bigint; isSymbolicLink: () => boolean },
-) => {
-  if (!lstat.isSymbolicLink()) {
-    throw reportableError(
-      `Expected ${path} to be a symlink, but it's not (mode = octal ${lstat.mode.toString(8)})`,
-    );
-  }
-};
 
 runCli(async () => {
   const installationInfoPlist = await readInfoPlist(kInstallation, {

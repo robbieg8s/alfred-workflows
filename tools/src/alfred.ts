@@ -19,9 +19,9 @@ export const prefsPath = () =>
  */
 export const currentWorkflowsRoot = async (prefsPath: string) => {
   const prefsData = await fs
-    .readFile(prefsPath)
+    .readFile(prefsPath, "utf8")
     .catch(reportAs(() => `Cannot read ${prefsPath}`));
-  const prefsJson = await encatchulate(jsonParse, prefsData.toString()).catch(
+  const prefsJson = await encatchulate(jsonParse, prefsData).catch(
     reportAs(() => `Failed to parse JSON from ${prefsPath}`),
   );
   const prefs = toJsonObject(prefsJson);

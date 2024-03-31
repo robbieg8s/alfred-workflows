@@ -332,6 +332,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>credentialsDialog.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -362,14 +385,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>credentialsDialog.js</string>
+				<string>toggleAccount.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
+			<string>77E97C69-083B-4EE0-8C51-9216C76E9319</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -401,138 +424,6 @@
 			<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>a?</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>configure.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>B49B586C-1604-4E68-9158-A5E693D8666E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>toggleAccount.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>77E97C69-083B-4EE0-8C51-9216C76E9319</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<true/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>add</string>
-						<key>outputlabel</key>
-						<string>add</string>
-						<key>uid</key>
-						<string>1703B817-FFC6-4EBD-9C0B-B95F32D0E93E</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>toggle</string>
-						<key>outputlabel</key>
-						<string>toggle</string>
-						<key>uid</key>
-						<string>113E4FF0-6426-4826-8803-58F1372057D5</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>delete</string>
-						<key>outputlabel</key>
-						<string>delete</string>
-						<key>uid</key>
-						<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>AC29A52D-9B64-42FB-B5D9-B209F3004A28</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -606,6 +497,76 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://id.atlassian.com/manage-profile/security/api-tokens</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E0868A07-553E-4398-84A6-3C4AAE054F1C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>a?</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>configure.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B49B586C-1604-4E68-9158-A5E693D8666E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -629,21 +590,60 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>add</string>
+						<key>outputlabel</key>
+						<string>add</string>
+						<key>uid</key>
+						<string>1703B817-FFC6-4EBD-9C0B-B95F32D0E93E</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>toggle</string>
+						<key>outputlabel</key>
+						<string>toggle</string>
+						<key>uid</key>
+						<string>113E4FF0-6426-4826-8803-58F1372057D5</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>delete</string>
+						<key>outputlabel</key>
+						<string>delete</string>
+						<key>uid</key>
+						<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
 				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://id.atlassian.com/manage-profile/security/api-tokens</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E0868A07-553E-4398-84A6-3C4AAE054F1C</string>
+			<string>AC29A52D-9B64-42FB-B5D9-B209F3004A28</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -674,7 +674,7 @@
 			<key>note</key>
 			<string>Contact Api Gateway</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>100</real>
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
@@ -683,111 +683,115 @@
 			<key>note</key>
 			<string>Open API Tokens Page</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>300</real>
 		</dict>
 		<key>61A37C9C-CB23-4829-A460-6BB397472512</key>
 		<dict>
 			<key>xpos</key>
-			<real>280</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>120</real>
 		</dict>
 		<key>68FB8EA0-639E-4082-957D-3F168BEB9E37</key>
 		<dict>
 			<key>note</key>
 			<string>Display configuration outcome</string>
 			<key>xpos</key>
-			<real>1305</real>
+			<real>1280</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>500</real>
 		</dict>
 		<key>77E97C69-083B-4EE0-8C51-9216C76E9319</key>
 		<dict>
 			<key>note</key>
 			<string>Toggle Enabled/Disabled for Account</string>
 			<key>xpos</key>
-			<real>510</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>500</real>
 		</dict>
 		<key>85E8D93A-4B01-40BD-964D-FBEB49313810</key>
 		<dict>
 			<key>note</key>
 			<string>Reminder to Delete Token</string>
 			<key>xpos</key>
-			<real>1110</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>700</real>
 		</dict>
 		<key>902A598E-CBB6-4913-ACB5-8853C56C90E6</key>
 		<dict>
+			<key>note</key>
+			<string>Move {var:account} to {query}</string>
 			<key>xpos</key>
-			<real>1020</real>
+			<real>910</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>730</real>
 		</dict>
 		<key>AC29A52D-9B64-42FB-B5D9-B209F3004A28</key>
 		<dict>
 			<key>note</key>
 			<string>Check {var:action}</string>
 			<key>xpos</key>
-			<real>294</real>
+			<real>269</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>705</real>
 		</dict>
 		<key>B49B586C-1604-4E68-9158-A5E693D8666E</key>
 		<dict>
 			<key>note</key>
 			<string>Show Configuration Options</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>100</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>700</real>
 		</dict>
 		<key>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</key>
 		<dict>
 			<key>note</key>
 			<string>Show Credentials Dialog</string>
 			<key>xpos</key>
-			<real>800</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>300</real>
 		</dict>
 		<key>BC77FB44-5620-4E46-BDE2-A37C25E56F32</key>
 		<dict>
 			<key>note</key>
 			<string>Delete Account</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>700</real>
 		</dict>
 		<key>E0868A07-553E-4398-84A6-3C4AAE054F1C</key>
 		<dict>
 			<key>note</key>
 			<string>Open API Tokens Page</string>
 			<key>xpos</key>
-			<real>850</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>700</real>
 		</dict>
 		<key>EEBF3B34-F579-406B-8AA6-58610D52B813</key>
 		<dict>
+			<key>note</key>
+			<string>Open Atlassian Link</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>85</real>
 		</dict>
 		<key>F757F97A-A972-43B8-A4E2-2591FD007B0C</key>
 		<dict>
 			<key>note</key>
 			<string>Check {var:action}</string>
 			<key>xpos</key>
-			<real>693</real>
+			<real>638</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>640</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -8,6 +8,29 @@ import fs from "node:fs/promises";
 import { runCli, reportAs } from "../cli.ts";
 import { kDist, kRaw } from "../fs-layout.ts";
 
+/**
+ * An esbuild plugin for minifying graphql to an importable string.
+ */
+const minifyGraphqlOnLoadPlugin = {
+  name: "minifyGraphql",
+  setup(build: esbuild.PluginBuild) {
+    const commentRe = /#[^\n]*\n/g;
+    const newlineRe = /\n/g;
+    const compressSpaceRe = /\s\s+/g;
+    const symbolAdjacentSpaceRe = / ?([:,{}]) ?/g;
+    build.onLoad({ filter: /\.graphql$/ }, async ({ path }) => ({
+      loader: "json",
+      contents: JSON.stringify(
+        (await fs.readFile(path, "utf8"))
+          .replaceAll(commentRe, "\n")
+          .replaceAll(newlineRe, " ")
+          .replaceAll(compressSpaceRe, " ")
+          .replaceAll(symbolAdjacentSpaceRe, (_, symbol) => symbol),
+      ),
+    }));
+  },
+};
+
 runCli(async () => {
   // Start clean
   await fs.rm(kDist, { force: true, recursive: true });
@@ -40,6 +63,7 @@ runCli(async () => {
       // Platform neutral since we don't want any node or browser support -
       // we're bundling for osascript.
       platform: "neutral",
+      plugins: [minifyGraphqlOnLoadPlugin],
       // esbuild ignores most tsconfig, but it does respect "strict" and emits a
       // "use strict", which results in undesirable output from the script, so
       // just ignore all tsconfig.  We will revisit if we end up needing

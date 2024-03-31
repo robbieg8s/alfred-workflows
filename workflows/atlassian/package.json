@@ -1,0 +1,18 @@
+{
+  "name": "@halfyak/alfred-workflows-atlassian",
+  "version": "1.0.0",
+  "description": "Query Atlassian Activity",
+  "author": "Robbie Gates",
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@halfyak/alfred-workflows-jxa": "workspace:"
+  },
+  "devDependencies": {
+    "@halfyak/alfred-workflows-tools": "workspace:",
+    "typescript": "5.3.3"
+  }
+}

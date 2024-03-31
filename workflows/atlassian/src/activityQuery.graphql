@@ -1,0 +1,40 @@
+query activityQuery($productFilter: [String!]) {
+  activity {
+    myActivity {
+      all(first: 100, filter: { arguments: { products: $productFilter } }) {
+        edges {
+          node {
+            event {
+              timestamp
+            }
+            object {
+              data {
+                __typename
+                ... on ConfluenceBlogPost {
+                  title
+                  links {
+                    webUi
+                    base
+                  }
+                  space {
+                    name
+                  }
+                }
+                ... on ConfluencePage {
+                  title
+                  links {
+                    webUi
+                    base
+                  }
+                  space {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

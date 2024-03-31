@@ -11,6 +11,7 @@ import { kInfoPlist, readInfoPlist } from "../info-plist.ts";
 import { helpImportWorkflow } from "../workflow.ts";
 
 import templatePackageJson from "../template-package.json";
+import templateTsconfigJson from "../template-tsconfig.json";
 
 runCli(async () => {
   // The repository subdirectory for the workflows
@@ -76,6 +77,11 @@ runCli(async () => {
         // stringify doesn't add a trailing newline, so we do
         JSON.stringify(packageJson, null, 2) + "\n",
       );
+      await fs.writeFile(
+        path.join(workflowPath, "tsconfig.json"),
+        // stringify doesn't add a trailing newline, so we do
+        JSON.stringify(templateTsconfigJson, null, 2) + "\n",
+      );
       // Create src directory hierarchy - use recursive for mkdir -p behaviour,
       // the directory won't exist since we just made workflowPath above.
       await fs.mkdir(path.join(workflowPath, "src", "scripts"), {
@@ -93,10 +99,9 @@ runCli(async () => {
         path.join(rawPath, kInfoPlist),
         { preserveTimestamps: true },
       );
-      JSON.stringify(packageJson, null, 2),
-        console.log(
-          `${workflowPath}: Set installation link, wrote package.json, created src/scripts, and copied raw/info.plist`,
-        );
+      console.log(
+        `${workflowPath}: Set installation link, wrote package.json, copied tsconfig.json, created src/scripts, and copied raw/info.plist`,
+      );
       console.log("Next steps:");
       console.log(
         helpImportWorkflow({

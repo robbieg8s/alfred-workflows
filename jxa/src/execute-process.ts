@@ -1,11 +1,4 @@
-export class DetailedError extends Error {
-  details: string;
-
-  constructor(message: string, details: string) {
-    super(message);
-    this.details = details;
-  }
-}
+import { detailedError } from "./sundry.ts";
 
 export const executeProcess = (
   executableFile: string,
@@ -16,7 +9,7 @@ export const executeProcess = (
   const stdoutPipe = $.NSPipe.pipe;
   const task = $.NSTask.alloc.init;
   if (!stdinPipe || !stdoutPipe || !task) {
-    throw new DetailedError(
+    throw detailedError(
       "Cannot set up to execute NSTask",
       `System calls failed when setting up to execute NSTask. stdinPipe = ${stdinPipe}, stdoutPipe = ${stdoutPipe}, task = ${task}.`,
     );
@@ -36,7 +29,7 @@ export const executeProcess = (
     const launchError = $();
     const ok = task.launchAndReturnError(launchError);
     if (!ok) {
-      throw new DetailedError(
+      throw detailedError(
         "Failed to launch NSTask",
         `The executable '${executableFile}' failed to launch. The macOS error was (${launchError.code}) '${launchError.localizedDescription.js}'.`,
       );
@@ -61,7 +54,7 @@ export const executeProcess = (
           `Nonzero status ${exitCode} for '${executableFile}', stderr is above, stdout was:`,
         );
         console.log(stdoutString);
-        throw new DetailedError(
+        throw detailedError(
           "Executable exit status nonzero",
           `The executable '${executableFile}' exited with status ${exitCode} which is nonzero. You can see stderr in the Alfred workflow debugger for the workflow. The executable stdout is there also.`,
         );

@@ -5,4 +5,6 @@
 export * from "./api";
 
 // These are just regular exports of helpers
+export * from "./alfred.ts";
 export * from "./execute-process.ts";
+export * from "./sundry.ts";

@@ -103,7 +103,7 @@ The previous token cannot be recovered if you choose Update Token.`,
           // See notes on the create path above regarding clipboard clear.
           writeClipboard("");
           return {
-            arg: `Update ${account}\nSystem clipboard cleared - check clipboard history also.`,
+            arg: `Updated ${account}\nSystem clipboard cleared - check clipboard history also.`,
           };
         }
       }

@@ -10,6 +10,22 @@ query activityQuery($productFilter: [String!]) {
             object {
               data {
                 __typename
+                ... on JiraIssue {
+                  webUrl
+                  key
+                  fieldsById(ids: ["summary"]) {
+                    edges {
+                      node {
+                        ... on JiraSingleLineTextField {
+                          # since we're only pulling out one field here, we
+                          # don't both with the fieldId. Note that atlassian.ts
+                          # is tightly coupled to this.
+                          text
+                        }
+                      }
+                    }
+                  }
+                }
                 ... on ConfluenceBlogPost {
                   title
                   links {

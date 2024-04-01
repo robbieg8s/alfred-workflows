@@ -9,10 +9,8 @@ Improvements that have occurred to me:
   - for the update token flow linked from a button in that dialog,
   - for the configuration flow linke from an item under `a?`
 
-- Improve the icons used in the enabled/disabled items under `a?`
 - Use the Alfred Script Filter `match` field to allow filtering by account or
   site.
-- Add support for showing Jira activity.
 - Make the number of results configurable. This is a little bit tricky because
   the activity endpoint doesn't have a text content filter, so all the text
   based filtering is done in Alfred.

@@ -99,7 +99,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
         setHeader("authorization", `Basic ${authorization}`);
         const body = {
           query: activityQuery,
-          variables: { productFilter: ["confluence"] },
+          variables: { productFilter: ["jira", "confluence"] },
         };
         urlRequest.HTTPBody = stringToNSDataUtf8(JSON.stringify(body));
 
@@ -177,29 +177,45 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       const userDateFormatter = createUserDateFormatter();
       const atlassianTimestampParser = createAtlassianTimestampParser();
 
+      // See comments in renderConfluencePageOrBlogPost below about why we roll
+      // our own host extraction and don't use NSURL.
+      const siteFromUrl = (url: string) => url.split("/")[2].split(".")[0];
       const renderConfluencePageOrBlogPost = (
         account: string,
         // @ts-expect-error This is GraphQL output, i've not typed that yet
         data,
         nsDate: unknown,
       ) => {
-        // Using NSURL.URLWithStringRelativeToURL doesn't work here, since The
+        // Using NSURL.URLWithStringRelativeToURL doesn't work here, since the
         // returned webUi has a leading /, and the returned base has a path
-        // component, and it strips the base path component in this case.
-        // Given this, and since osascript does not appear to provide the
-        // standard URL class, we parse the host by string split, and join the
-        // full url ourselves.
+        // component, and that NS api strips the base path component in this case.
         const { base, webUi } = data.links;
-        const host = base.split("/")[2].split(".")[0];
+        const site = siteFromUrl(base);
         return {
           title: data.title,
-          subtitle: `in ${data.space.name} (${host}/${account}) on ${userDateFormatter(nsDate)}`,
+          subtitle: `in ${data.space.name} (${site}/${account}) on ${userDateFormatter(nsDate)}`,
           arg: base + webUi,
+        };
+      };
+      const renderJiraIssue = (
+        account: string,
+        // @ts-expect-error This is GraphQL output, i've not typed that yet
+        data,
+        nsDate: unknown,
+      ) => {
+        const { webUrl, key, fieldsById } = data;
+        return {
+          // The 0 here is coupled to the fact we only request a single field,
+          // namely summary, in the GraphQL.
+          title: fieldsById.edges[0].node.text,
+          subtitle: `${key} (${siteFromUrl(webUrl)}/${account}) on ${userDateFormatter(nsDate)}`,
+          arg: webUrl,
         };
       };
       const renderersByTypename = new Map([
         ["ConfluenceBlogPost", renderConfluencePageOrBlogPost],
         ["ConfluencePage", renderConfluencePageOrBlogPost],
+        ["JiraIssue", renderJiraIssue],
       ]);
       // We want to merge the data from all the requests
       const renderedActivityItems = Array.from(dataByAccount.entries())
@@ -225,7 +241,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
                   if (undefined === renderer) {
                     // It's a type we don't support yet - for example the
                     // Confluence activity includes comments and whiteboard
-                    // activity. Just discard it
+                    // activity. Just discard it.
                     return undefined;
                   } else {
                     // We need to parse the timestamp to render the item, and

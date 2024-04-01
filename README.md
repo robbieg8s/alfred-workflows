@@ -3,7 +3,10 @@ launcher for Mac, plus opinionated tooling for developing workflows.
 
 The workflows included are
 
-- Safari History: Search safari history by title substrings
+- [Atlassian](workflows/atlassian/README.md): Search recent activity on
+  Atlassian Cloud Confluence and Jira.
+- [Safari History](workflows/safari-history/README.md): Search safari history by
+  substrings of page titles.
 
 The workflows and all tooling are written in typescript. The workflows execute
 using the macOS `osascript` javascript interpreter, the tooling executes using
@@ -27,12 +30,9 @@ work.
 
 The tooling workflow has five components:
 
+- bootstrap-workflow to bring a new Alfred workflow under source control
 - bundle-workflow to transpile for osascript
 - export-workflow to build distributable workflows
 - import-workflow to copy changes from Alfred UI to git workspace
 - link-workflow to connect a git workspace to an installed workflow
-- update-workflow to copy built workflow from git workspace to live
-  install
-
-No mechanism is currently provided for bootstrap from a workflow created in
-Alfred to the git workspace.
+- update-workflow to copy built workflow from git workspace to live install

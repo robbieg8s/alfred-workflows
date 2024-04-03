@@ -2,13 +2,7 @@ Improvements that have occurred to me:
 
 ## Atlassian
 
-- Add Documentation for basic usage. Markdown in the repository is the easiest
-  path here. Include specific Help:
-
-  - for the create flow linked from a button in that dialog,
-  - for the update token flow linked from a button in that dialog,
-  - for the configuration flow linke from an item under `a?`
-
+- Include specific Help for the configuration flow linked from an item under `a?`.
 - Use the Alfred Script Filter `match` field to allow filtering by account or
   site.
 - Make the number of results configurable. This is a little bit tricky because

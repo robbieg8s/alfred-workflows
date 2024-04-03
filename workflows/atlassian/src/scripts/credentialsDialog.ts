@@ -1,16 +1,24 @@
 import {
-  displayDialog,
+  displayDialogRepeat,
+  openUrl,
   runScript,
   AlfredRunScriptJson,
 } from "@halfyak/alfred-workflows-jxa";
 
 import { readClipboard, writeClipboard } from "../pasteboard.ts";
 import { createAccount, updateAccountToken } from "../security.ts";
-import { suggestedTokenLabel } from "../sundry.ts";
+import { hostFromUrl, suggestedTokenLabel } from "../sundry.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = runScript((): AlfredRunScriptJson => {
   writeClipboard(suggestedTokenLabel());
+  const openHelpAndExplain = () => {
+    const helpUrl =
+      "https://github.com/robbieg8s/alfred-workflows/blob/main/workflows/atlassian/docs/Configuration.md#adding-an-account";
+    openUrl(helpUrl);
+    return `Configuration Help page has been opened in your browser. The tab is served from ${hostFromUrl(helpUrl)}.`;
+  };
+
   // This does not support full RFC 5321, specifically a Quoted-string
   // local-part is not permitted, double . in local-parts is permitted, and
   // length limits are not applied. It should be permissive enough for typical
@@ -19,94 +27,108 @@ run = runScript((): AlfredRunScriptJson => {
   // See https://www.rfc-editor.org/rfc/rfc5322#section-3.2.3
   const accountRe =
     /^[!#$%&'*+/0-9=?A-Z^_`a-z{|}~.-]+@[0-9A-Za-z][0-9A-Za-z-]*(\.[0-9A-Za-z][0-9A-Za-z-]*)*$/;
-  let account = "";
-  let lastError: string | undefined = undefined;
-  for (;;) {
-    const createResponse = displayDialog(
-      `Enter the Atlassian Account email in the text box below.
+  const createText = (
+    more?: string,
+  ) => `Enter the Atlassian Account email in the text box below.
 The workflow has opened the Atlassian Account API Tokens page in your browser.
 Verify the account matches that in the top right corner profile menu with your avatar.
 Use the Create API token button - a suggested Label has been placed on your clipboard.
 Press the Copy button once the token is generated, then press Token Copied below.
-${lastError ? `\n${lastError}\n` : ""}
-Atlassian Account Email:`,
-      {
-        withTitle: "Configure Atlassian Account Token",
-        defaultAnswer: account,
-        buttons: ["Cancel", "Token Copied"],
-        defaultButton: "Token Copied",
-        withIcon: Path("key.icns"),
-      },
-    );
-    // Note createResponse is undefined when cancelled, this form of the test is
-    // more compact, and has better failure modes if we add more buttons.
-    if (createResponse?.buttonReturned !== "Token Copied") {
-      return { arg: "Cancelled" };
-    } else {
-      // Persist account around the loop to make editing easier. Note that
-      // textReturned won't be undefined according to the displayDialog
-      // documentation, since we provided defaultAnswer, but i haven't explained
-      // that to typescript yet, so just help it along.
-      account = createResponse?.textReturned ?? "";
-      if (!accountRe.test(account)) {
-        lastError = "Account does not look like a valid email";
-        continue;
+${more ? `\n${more}\n` : ""}
+Atlassian Account Email:`;
+  const createAnswer = displayDialogRepeat(
+    createText(),
+    {
+      withTitle: "Configure Atlassian Account Token",
+      defaultAnswer: "",
+      buttons: ["Cancel", "Help", "Token Copied"],
+      defaultButton: "Token Copied",
+      withIcon: Path("key.icns"),
+    },
+    (response, details) => {
+      // Whatever happens, persist account around the loop to make editing
+      // easier.  Note that textReturned won't be undefined according to the
+      // displayDialog documentation, since we provided defaultAnswer, but i
+      // haven't explained that to typescript yet, so just help it along.
+      const account = response?.textReturned ?? "";
+      details.defaultAnswer = account;
+      // Note response is undefined when cancelled, the form of the conditions
+      // here is design for readability and failure modes.
+      if (response?.buttonReturned === "Help") {
+        return createText(openHelpAndExplain());
+      } else if (response?.buttonReturned === "Token Copied") {
+        if (!accountRe.test(account)) {
+          return createText("Account does not look like a valid email");
+        }
+        const token = readClipboard();
+        if (undefined === token) {
+          // It's pretty hard for this to happen since we populate the clipboard
+          // above with our suggested label, but it is in principle possible.
+          return createText("No token found on clipboard. Did you copy one?");
+        }
+        // We could do a more extensive check, but i can't find Atlassian
+        // documentation on this format, and this catches the usual "forgot to
+        // copy" case.
+        if (!token.startsWith("ATATT")) {
+          return createText(
+            "Clipboard contents do not look like an Atlassian token. Did you copy one?",
+          );
+        }
+        // Ok, all looks good
+        return { account, token };
       }
-      const token = readClipboard();
-      if (undefined === token) {
-        // It's pretty hard for this to happen since we populate the clipboard
-        // above with our suggested label, but it is in principle possible.
-        lastError = "No token found on clipboard. Did you copy one?";
-        continue;
-      }
-      // We could do a more extensive check, but i can't find Atlassian
-      // documentation on this format, and this catches the usual "forgot to
-      // copy" case.
-      if (!token.startsWith("ATATT")) {
-        lastError =
-          "Clipboard contents do not look like an Atlassian token. Did you copy one?";
-        continue;
-      }
+      // In any other case, we're done one way, or another
+      return undefined;
+    },
+  );
+  if (undefined === createAnswer) {
+    return { arg: "Cancelled" };
+  } else {
+    const { account, token } = createAnswer;
+    if (createAccount({ account, details: { enabled: true } }, token)) {
+      // We clear the system clipboard to discard the token.
+      writeClipboard("");
+      // Of course, it might have also made it into Alfred's Clipboard History
+      // feature, and there's no document API for this. It can be done by
+      // editing the Alfred sqlite database directly, but i'm leery of that.
+      // Note clipboard is also cleared below on the update path.
+      // https://www.alfredforum.com/topic/18702-clear-clipboard-history-and-clipboard/
+      return {
+        arg: `Created ${account}\nSystem clipboard cleared - check clipboard history also.`,
+      };
+    }
 
-      if (createAccount({ account, details: { enabled: true } }, token)) {
-        // We clear the system clipboard to discard the token.
-        writeClipboard("");
-        // Of course, it might have also made it into Alfred's Clipboard History
-        // feature, and there's no document API for this. It can be done by
-        // editing the Alfred sqlite database directly, but i'm leery of that.
-        // Note clipboard is also cleared below on the update path.
-        // https://www.alfredforum.com/topic/18702-clear-clipboard-history-and-clipboard/
-        return {
-          arg: `Created ${account}\nSystem clipboard cleared - check clipboard history also.`,
-        };
-      } else {
-        // createAccount reports false if the account is already present, as opposed to errors in the
-        // process which are thrown and will fail the workflow. So verify the overwrite was intended:
-        const updateResponse = displayDialog(
-          `A token is already present for:
+    // createAccount reports false if the account is already present, as opposed to errors in the
+    // process which are thrown. So verify the overwrite was intended:
+    const updateText = (more?: string) => `A token is already present for:
   ${account}
 Overwrite with new token?
-The previous token cannot be recovered if you choose Update Token.`,
-          {
-            withTitle: "Update Token?",
-            buttons: ["Cancel", "Update Token"],
-            defaultButton: "Cancel",
-            withIcon: "caution",
-          },
-        );
-        // Note updateResponse is undefined when cancelled, this form of the test is
-        // more compact, and has better failure modes if we add more buttons.
-        if (updateResponse?.buttonReturned !== "Update Token") {
-          return { arg: "Cancelled" };
-        } else {
-          updateAccountToken(account, token);
-          // See notes on the create path above regarding clipboard clear.
-          writeClipboard("");
-          return {
-            arg: `Updated ${account}\nSystem clipboard cleared - check clipboard history also.`,
-          };
+The previous token cannot be recovered if you choose Update Token.${more ? `\n\n${more}` : ""}`;
+    const updateAnswer = displayDialogRepeat(
+      updateText(),
+      {
+        withTitle: "Update Token?",
+        buttons: ["Cancel", "Help", "Update Token"],
+        defaultButton: "Cancel",
+        withIcon: "caution",
+      },
+      (response) => {
+        if (response?.buttonReturned === "Help") {
+          return updateText(openHelpAndExplain());
         }
-      }
+        return response?.buttonReturned === "Update Token";
+      },
+    );
+
+    if (!updateAnswer) {
+      return { arg: "Cancelled" };
+    } else {
+      updateAccountToken(account, token);
+      // See notes on the create path above regarding clipboard clear.
+      writeClipboard("");
+      return {
+        arg: `Updated ${account}\nSystem clipboard cleared - check clipboard history also.`,
+      };
     }
   }
 });

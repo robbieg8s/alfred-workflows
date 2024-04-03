@@ -53,3 +53,41 @@ export const displayDialog = (
     return undefined;
   }
 };
+
+/**
+ * Display a dialog repeatedly.
+ *
+ * This is intended for use in validation scenarios, or where supplemental
+ * buttons are provided which should not dismiss the dialog. Since there is no
+ * direct support for this in JXA, we simply reraise the dialog when it should
+ * not be dismissed.
+ *
+ * @param text - passed to the first invocation of {@link displayDialog}.
+ * @param details - passed to the first invocation of {@link displayDialog}.
+ * @param repeat - called with a `response` from {@link displayDialog}. If
+ * `repeat` returns a string, {@link displayDialog} is reinvoked with that
+ * string as `text` and the (possibly modified) `details`, and `repeat` will be
+ * invoked again when the repeat dialog is closed.  If `repeat` returns anything
+ * else, it is returned to the caller of {@link displayDialogRepeat}.
+ */
+export const displayDialogRepeat = <TAnswer>(
+  text: string,
+  details: DisplayDialogDetails,
+  repeat: (
+    response: DisplayDialogResponse | undefined,
+    details: DisplayDialogDetails,
+  ) => string | TAnswer,
+) => {
+  let response = displayDialog(text, details);
+  for (;;) {
+    const textOrAnswer = repeat(response, details);
+    if ("string" === typeof textOrAnswer) {
+      response = displayDialog(textOrAnswer, details);
+    } else {
+      return textOrAnswer;
+    }
+  }
+};
+
+export const openUrl = (url: string) =>
+  $.NSWorkspace.sharedWorkspace.openURL($.NSURL.URLWithString(url));

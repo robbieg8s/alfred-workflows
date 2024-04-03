@@ -6,8 +6,9 @@ import {
 import { queryAccountToken, queryAllAccounts } from "../security.ts";
 import {
   halfyakService,
-  stringToNSDataUtf8,
   nsDataUtf8ToString,
+  siteFromUrl,
+  stringToNSDataUtf8,
 } from "../sundry.ts";
 
 import activityQuery from "../activityQuery.graphql";
@@ -177,23 +178,21 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       const userDateFormatter = createUserDateFormatter();
       const atlassianTimestampParser = createAtlassianTimestampParser();
 
-      // See comments in renderConfluencePageOrBlogPost below about why we roll
-      // our own host extraction and don't use NSURL.
-      const siteFromUrl = (url: string) => url.split("/")[2].split(".")[0];
       const renderConfluencePageOrBlogPost = (
         account: string,
         // @ts-expect-error This is GraphQL output, i've not typed that yet
         data,
         nsDate: unknown,
       ) => {
-        // Using NSURL.URLWithStringRelativeToURL doesn't work here, since the
-        // returned webUi has a leading /, and the returned base has a path
-        // component, and that NS api strips the base path component in this case.
         const { base, webUi } = data.links;
         const site = siteFromUrl(base);
         return {
           title: data.title,
           subtitle: `in ${data.space.name} (${site}/${account}) on ${userDateFormatter(nsDate)}`,
+          // Using NSURL.URLWithStringRelativeToURL to join doesn't work here,
+          // since the returned webUi has a leading /, and the returned base has
+          // a path component, and URLWithStringRelativeToURL strips the base
+          // path component in this case.
           arg: base + webUi,
         };
       };

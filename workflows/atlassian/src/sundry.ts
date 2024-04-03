@@ -44,6 +44,20 @@ export const createCFDictionary = (...kv: [unknown, unknown][]) => {
  */
 export const halfyakService = cfString("org.halfyak.alfredapp.atlassian");
 
+/**
+ * Return the host from a url string.
+ *
+ * Empirically, osascript does not provide the JavaScript URL class. Really we
+ * should implement is using NSURL, but for now this will do.
+ */
+export const hostFromUrl = (url: string) => url.split("/")[2];
+
+/**
+ * Return the lead dotted component of the host of a url, which is the site in
+ * Atlassian terms for an Atlassian Cloud url.
+ */
+export const siteFromUrl = (url: string) => hostFromUrl(url).split(".")[0];
+
 export const suggestedTokenLabel = () => {
   const application = Application.currentApplication();
   application.includeStandardAdditions = true;

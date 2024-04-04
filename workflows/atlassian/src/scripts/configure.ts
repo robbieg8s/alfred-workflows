@@ -3,6 +3,7 @@ import {
   AlfredScriptFilterItem,
 } from "@halfyak/alfred-workflows-jxa";
 import { queryAllAccounts } from "../security.ts";
+import { helpConfiguration } from "../urls.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = scriptFilter((): AlfredScriptFilterItem[] => {
@@ -41,5 +42,12 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           },
         }),
       ),
+    {
+      title: "Show help for configuring this workflow",
+      subtitle: "Action to browse to the help page for configuring this workflow.",
+      arg: helpConfiguration,
+      icon: { path: "help.png" },
+      variables: { action: "help" },
+    },
   ];
 });

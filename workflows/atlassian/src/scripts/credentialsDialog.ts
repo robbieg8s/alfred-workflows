@@ -8,15 +8,14 @@ import {
 import { readClipboard, writeClipboard } from "../pasteboard.ts";
 import { createAccount, updateAccountToken } from "../security.ts";
 import { hostFromUrl, suggestedTokenLabel } from "../sundry.ts";
+import { helpAdd } from "../urls.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = runScript((): AlfredRunScriptJson => {
   writeClipboard(suggestedTokenLabel());
   const openHelpAndExplain = () => {
-    const helpUrl =
-      "https://github.com/robbieg8s/alfred-workflows/blob/main/workflows/atlassian/docs/Configuration.md#adding-an-account";
-    openUrl(helpUrl);
-    return `Configuration Help page has been opened in your browser. The tab is served from ${hostFromUrl(helpUrl)}.`;
+    openUrl(helpAdd);
+    return `Configuration Help page has been opened in your browser. The tab is served from ${hostFromUrl(helpAdd)}.`;
   };
 
   // This does not support full RFC 5321, specifically a Quoted-string
@@ -53,7 +52,7 @@ Atlassian Account Email:`;
       const account = response?.textReturned ?? "";
       details.defaultAnswer = account;
       // Note response is undefined when cancelled, the form of the conditions
-      // here is design for readability and failure modes.
+      // here is chosen for readability and failure modes.
       if (response?.buttonReturned === "Help") {
         return createText(openHelpAndExplain());
       } else if (response?.buttonReturned === "Token Copied") {

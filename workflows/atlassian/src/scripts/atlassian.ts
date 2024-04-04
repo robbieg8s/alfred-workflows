@@ -46,9 +46,9 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
   if (0 === accountItems.length) {
     return [
       {
-        title: "No Atlassian Token - Add a new Atlassian Account?",
+        title: "No Atlassian Token - Connect an Atlassian Account?",
         subtitle:
-          "Select to browse to Atlassian Tokens page & show a dialog to continue.",
+          "Action this to browse to the Atlassian Tokens page & show a dialog to set up a connection.",
         icon: { path: "account.png" },
       },
     ];
@@ -59,7 +59,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
     if (0 === enabledAccountItems.length) {
       return [
         {
-          title: "All Configured Atlassian Accounts are disabled",
+          title: "All connected Atlassian Accounts are disabled",
           subtitle: "Use the configuration workflow a? to toggle some on.",
           icon: { path: "disabled.png" },
           valid: false,

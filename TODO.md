@@ -2,7 +2,6 @@ Improvements that have occurred to me:
 
 ## Atlassian
 
-- Include specific Help for the configuration flow linked from an item under `a?`.
 - Use the Alfred Script Filter `match` field to allow filtering by account or
   site.
 - Make the number of results configurable. This is a little bit tricky because

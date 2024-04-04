@@ -14,26 +14,26 @@ run = runScript((account): AlfredRunScriptJson => {
   }
   // Confirm with the user, since token deletion is irreversible
   const response = displayDialog(
-    `Really remove configuration for:
+    `Really remove token and disconnect Atlassian Account:
   ${account}
 from Halfyak Atlassian workflow for Alfred?
 
 This cannot be undone.`,
     {
-      withTitle: "Confirm Delete",
-      buttons: ["Cancel", "Delete"],
+      withTitle: "Confirm Disconnect Account",
+      buttons: ["Cancel", "Disconnect"],
       defaultButton: "Cancel",
       withIcon: "stop",
     },
   );
   // Note response is undefined when cancelled, this form of the test is more
   // compact, and has better failure modes if we add more buttons.
-  if (response?.buttonReturned !== "Delete") {
+  if (response?.buttonReturned !== "Disconnect") {
     return { arg: "Cancelled", variables: { action: "cancel" } };
   } else {
     deleteAccount(account);
     return {
-      arg: `Removed ${account}`,
+      arg: `Disconnected ${account}`,
       variables: { action: "delete", account },
     };
   }

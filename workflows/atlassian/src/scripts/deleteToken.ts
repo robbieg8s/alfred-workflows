@@ -15,7 +15,7 @@ run = runScript((account): AlfredRunScriptJson => {
   displayDialog(
     `You need to revoke the API Token for:
   ${account}
-The workflow has opened the Atlassian Account API Tokens page in your browser.
+The Atlassian Account API Tokens page has been opened in your browser.
 Verify the account matches that in the top right corner profile menu with your avatar.
 Find the corresponding token, and click the Revoke link under Action.
 The Label suggested on creation was ${suggestedTokenLabel()}`,
@@ -25,5 +25,5 @@ The Label suggested on creation was ${suggestedTokenLabel()}`,
       withIcon: "note",
     },
   );
-  return { arg: `Removed ${account}` };
+  return { arg: `Disconnected ${account}` };
 });

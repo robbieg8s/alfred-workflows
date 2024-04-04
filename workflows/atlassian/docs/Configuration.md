@@ -79,6 +79,8 @@ it performs some basic validation of the provided email address. It also
 inspects the clipboard after you click **Token Copied** to ensure the token
 has the known prefix `ATATT` which current Atlassian API Tokens start with.
 
+## Updating a token
+
 If you attempt to configure an email address that you have already
 configured, the workflow will warn you. It is impossible to recover the
 prior token if you erase it at this point, so you are warned before taking

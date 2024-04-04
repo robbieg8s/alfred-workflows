@@ -10,9 +10,9 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
   const accounts = queryAllAccounts();
   return [
     {
-      title: "Add a new Atlassian Account",
+      title: "Connect an Atlassian Account",
       subtitle:
-        "Select to browse to Atlassian Tokens page & show a dialog to continue.",
+        "Browse to the Atlassian Tokens page & show a dialog to set up a connection.",
       // We put the api-tokens url here so that it can be cmd+C'd. In a future
       // refactor it would be nice to pass it through the workflow to centralize
       // it's value in code, but that currently depends on how rework to share
@@ -28,7 +28,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       .map(
         ({ account, details: { enabled } }): AlfredScriptFilterItem => ({
           title: account,
-          subtitle: `Action to ${enabled ? "disable" : "enable"}, hold ⌘ for delete`,
+          subtitle: `${enabled ? "Disable" : "Enable"} this connection, hold ⌘ for disconnect.`,
           arg: account,
           icon: { path: enabled ? "enabled.png" : "disabled.png" },
           // We don't need a match element - Alfred word splits the domains which is
@@ -36,15 +36,15 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           variables: { action: "toggle" },
           mods: {
             cmd: {
-              subtitle: "Action to delete this account (no undo!)",
+              subtitle: "Disconnect this account.",
               variables: { action: "delete" },
             },
           },
         }),
       ),
     {
-      title: "Show help for configuring this workflow",
-      subtitle: "Action to browse to the help page for configuring this workflow.",
+      title: "Show help for configuring connections",
+      subtitle: "Browse to the help page about configuring this workflow.",
       arg: helpConfiguration,
       icon: { path: "help.png" },
       variables: { action: "help" },

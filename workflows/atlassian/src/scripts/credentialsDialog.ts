@@ -29,7 +29,7 @@ run = runScript((): AlfredRunScriptJson => {
   const createText = (
     more?: string,
   ) => `Enter the Atlassian Account email in the text box below.
-The workflow has opened the Atlassian Account API Tokens page in your browser.
+The Atlassian Account API Tokens page has been opened in your browser.
 Verify the account matches that in the top right corner profile menu with your avatar.
 Use the Create API token button - a suggested Label has been placed on your clipboard.
 Press the Copy button once the token is generated, then press Token Copied below.
@@ -38,7 +38,7 @@ Atlassian Account Email:`;
   const createAnswer = displayDialogRepeat(
     createText(),
     {
-      withTitle: "Configure Atlassian Account Token",
+      withTitle: "Connect Atlassian Account",
       defaultAnswer: "",
       buttons: ["Cancel", "Help", "Token Copied"],
       defaultButton: "Token Copied",
@@ -70,7 +70,7 @@ Atlassian Account Email:`;
         // copy" case.
         if (!token.startsWith("ATATT")) {
           return createText(
-            "Clipboard contents do not look like an Atlassian token. Did you copy one?",
+            "Clipboard contents do not look like an Atlassian API token. Did you copy one?",
           );
         }
         // Ok, all looks good
@@ -93,7 +93,7 @@ Atlassian Account Email:`;
       // Note clipboard is also cleared below on the update path.
       // https://www.alfredforum.com/topic/18702-clear-clipboard-history-and-clipboard/
       return {
-        arg: `Created ${account}\nSystem clipboard cleared - check clipboard history also.`,
+        arg: `Connected ${account}\nSystem clipboard cleared - check clipboard history also.`,
       };
     }
 

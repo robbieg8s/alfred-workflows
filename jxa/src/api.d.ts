@@ -17,6 +17,10 @@ declare global {
   const $: any;
   // This provides the Obj.import function, plus some other utilities
   const ObjC: any;
+  /**
+   * While this is mentioned on the Apple page above, it's not really documented, but empirically it delays by seconds.
+   */
+  const delay: (seconds: number) => undefined;
   // This is the global which is used for the handler when invoking js via an osascript #!
   let run: (argv: string[]) => string;
   // This is the global for accessing scripting additions

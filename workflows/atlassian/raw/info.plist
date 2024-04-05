@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5403DB6E-8548-4FAA-B28D-E7C5357F22F1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>61A37C9C-CB23-4829-A460-6BB397472512</key>
 		<array>
 			<dict>
@@ -50,7 +37,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>5403DB6E-8548-4FAA-B28D-E7C5357F22F1</string>
+				<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -72,37 +59,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>85E8D93A-4B01-40BD-964D-FBEB49313810</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>902A598E-CBB6-4913-ACB5-8853C56C90E6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>85E8D93A-4B01-40BD-964D-FBEB49313810</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>AC29A52D-9B64-42FB-B5D9-B209F3004A28</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5403DB6E-8548-4FAA-B28D-E7C5357F22F1</string>
+				<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,18 +87,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>60614954-C1F1-461C-8651-DE2C1EB6EEEC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>9B0C109E-AB41-4B8E-BDDF-800414B22729</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>BC77FB44-5620-4E46-BDE2-A37C25E56F32</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -145,6 +94,18 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>60614954-C1F1-461C-8651-DE2C1EB6EEEC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>9B0C109E-AB41-4B8E-BDDF-800414B22729</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -179,51 +140,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F757F97A-A972-43B8-A4E2-2591FD007B0C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E0868A07-553E-4398-84A6-3C4AAE054F1C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>902A598E-CBB6-4913-ACB5-8853C56C90E6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F757F97A-A972-43B8-A4E2-2591FD007B0C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>1703B817-FFC6-4EBD-9C0B-B95F32D0E93E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E0868A07-553E-4398-84A6-3C4AAE054F1C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -259,6 +180,29 @@
 			<string>EEBF3B34-F579-406B-8AA6-58610D52B813</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>credentialsDialog.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -344,70 +288,52 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://id.atlassian.com/manage-profile/security/api-tokens</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>5403DB6E-8548-4FAA-B28D-E7C5357F22F1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>a?</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>configure.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
+				<string>toggleAccount.js</string>
 				<key>type</key>
 				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B49B586C-1604-4E68-9158-A5E693D8666E</string>
+			<string>77E97C69-083B-4EE0-8C51-9216C76E9319</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -423,14 +349,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>credentialsDialog.js</string>
+				<string>deleteAccount.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
+			<string>BC77FB44-5620-4E46-BDE2-A37C25E56F32</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -511,52 +437,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>a?</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>toggleAccount.js</string>
+				<string>configure.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
 				<key>type</key>
 				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>77E97C69-083B-4EE0-8C51-9216C76E9319</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>withspace</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
+			<string>B49B586C-1604-4E68-9158-A5E693D8666E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -581,136 +504,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<true/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>cancel</string>
-						<key>outputlabel</key>
-						<string>cancel</string>
-						<key>uid</key>
-						<string>1703B817-FFC6-4EBD-9C0B-B95F32D0E93E</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>delete</string>
-						<key>outputlabel</key>
-						<string>delete</string>
-						<key>uid</key>
-						<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>F757F97A-A972-43B8-A4E2-2591FD007B0C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>deleteAccount.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BC77FB44-5620-4E46-BDE2-A37C25E56F32</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>deleteToken.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>85E8D93A-4B01-40BD-964D-FBEB49313810</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://id.atlassian.com/manage-profile/security/api-tokens</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E0868A07-553E-4398-84A6-3C4AAE054F1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{var:account}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>902A598E-CBB6-4913-ACB5-8853C56C90E6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -723,77 +516,50 @@
 			<key>xpos</key>
 			<real>100</real>
 			<key>ypos</key>
-			<real>100</real>
-		</dict>
-		<key>5403DB6E-8548-4FAA-B28D-E7C5357F22F1</key>
-		<dict>
-			<key>note</key>
-			<string>Open API Tokens Page</string>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>300</real>
+			<real>250</real>
 		</dict>
 		<key>60614954-C1F1-461C-8651-DE2C1EB6EEEC</key>
 		<dict>
 			<key>note</key>
-			<string>Open Atlassian Link</string>
+			<string>Open Help Link</string>
 			<key>xpos</key>
-			<real>230</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>700</real>
 		</dict>
 		<key>61A37C9C-CB23-4829-A460-6BB397472512</key>
 		<dict>
 			<key>xpos</key>
-			<real>270</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>270</real>
 		</dict>
 		<key>68FB8EA0-639E-4082-957D-3F168BEB9E37</key>
 		<dict>
 			<key>note</key>
 			<string>Display configuration outcome</string>
 			<key>xpos</key>
-			<real>1280</real>
+			<real>1100</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>400</real>
 		</dict>
 		<key>77E97C69-083B-4EE0-8C51-9216C76E9319</key>
 		<dict>
 			<key>note</key>
 			<string>Toggle Enabled/Disabled for Account</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>500</real>
-		</dict>
-		<key>85E8D93A-4B01-40BD-964D-FBEB49313810</key>
-		<dict>
-			<key>note</key>
-			<string>Reminder to Delete Token</string>
-			<key>xpos</key>
-			<real>1010</real>
-			<key>ypos</key>
-			<real>700</real>
-		</dict>
-		<key>902A598E-CBB6-4913-ACB5-8853C56C90E6</key>
-		<dict>
-			<key>note</key>
-			<string>Move {var:account} to {query}</string>
-			<key>xpos</key>
-			<real>910</real>
-			<key>ypos</key>
-			<real>730</real>
+			<real>400</real>
 		</dict>
 		<key>AC29A52D-9B64-42FB-B5D9-B209F3004A28</key>
 		<dict>
 			<key>note</key>
 			<string>Check {var:action}</string>
 			<key>xpos</key>
-			<real>269</real>
+			<real>349</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>590</real>
 		</dict>
 		<key>B49B586C-1604-4E68-9158-A5E693D8666E</key>
 		<dict>
@@ -802,52 +568,34 @@
 			<key>xpos</key>
 			<real>100</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>600</real>
 		</dict>
 		<key>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</key>
 		<dict>
 			<key>note</key>
 			<string>Show Credentials Dialog</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>250</real>
 		</dict>
 		<key>BC77FB44-5620-4E46-BDE2-A37C25E56F32</key>
 		<dict>
 			<key>note</key>
 			<string>Delete Account</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>700</real>
-		</dict>
-		<key>E0868A07-553E-4398-84A6-3C4AAE054F1C</key>
-		<dict>
-			<key>note</key>
-			<string>Open API Tokens Page</string>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>700</real>
+			<real>550</real>
 		</dict>
 		<key>EEBF3B34-F579-406B-8AA6-58610D52B813</key>
 		<dict>
 			<key>note</key>
 			<string>Open Atlassian Link</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>85</real>
-		</dict>
-		<key>F757F97A-A972-43B8-A4E2-2591FD007B0C</key>
-		<dict>
-			<key>note</key>
-			<string>Check {var:action}</string>
-			<key>xpos</key>
-			<real>638</real>
-			<key>ypos</key>
-			<real>640</real>
+			<real>100</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

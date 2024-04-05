@@ -16,21 +16,22 @@ consider:
    processes on your computer can exfiltrate these tokens.
 2. The process of setting up tokens requires copying tokens to and from your
    clipboard. You should disable any clipboard history manager, including
-   Alfred's built in one if you use it, _**before**_ you follow this process.
+   Alfred's built in one if you use it, _**before**_ you follow this process,
+   and re-enable it afterwards.
 3. You are trusting this workflow to only perform actions you have requested.
    To help build this trust the workflow source code is available, including
    the tooling used to build it. I will take seriously any advice about
    security related aspects of this workflow. Having said that, this is an
    _at your own risk_ decision by you.
 
-## Adding an Account
+## Connecting an Account
 
-To add your first account, you can use the `a?` keyword:
+To connect your Atlassian Account, you can use the `a?` keyword:
 
-![The "Add a new Atlassian Account" menu item](add-first-account.png)
+![The "Connect an Atlassian Account" menu item](add-first-account.png)
 
-If you try to use the search keyword `aa` and no accounts have been configured,
-the workflow will prompt you to add an account also:
+If you try to use the search keyword `aa` and no accounts have been connected,
+the workflow will prompt you to connect an account also:
 
 ![The "No Atlassian Token" menu item](no-atlassian-token.png)
 
@@ -42,30 +43,31 @@ happen at this point:
 2. A description of the usage, something like _Halfyak Atlassian workflow
    for Alfred, user alice on Alice's Mac_, will be copied to your clipboard.
    This is intended be to be used as a token label.
-3. A dialog titled "Configure Atlassian Account Token" will be presented.
+3. A dialog titled "Connect Atlassian Account " will be presented by the
+   workflow.
+
+![The "Connect Atlassian Account" dialog](configure-token.png)
 
 The intended flow at this point is
 
 1. Click the **Create API Token** button on the Atlassian Account page opened
    by item 1 above.
-2. In the **Create an API Token** dialog that is raised, paste the label
-   placed on your clipboard by item 2 above. You may of course edit it if
-   you wish, or use a label of your own choosing. A label should make it
-   easy to find where you are about to store the token, in case you need to
-   regenerate it in the future.
+2. In the **Create an API Token** dialog that is raised in the browser, paste
+   the label placed on your clipboard by item 2 above. You may of course
+   edit it if you wish, or use a label of your own choosing. A label should
+   make it easy to find where you are about to store the token, in case you
+   need to regenerate it in the future.
 3. Enter the email address associated with your Atlassian Account in the
    workflow dialog from item 3 above. At this point, your clipboard contents
    are not required, so you can copy and paste your email address from
    elsewhere if that is easier than typing it.
-4. Return to the **Create an API Token** dialog from step 2, and click the
-   **Create** button. The dialog title will become **Your new API Token**.
-   Click the **Copy** button in this dialog, and your API Token will be
-   copied to the macOS clipboard.
+4. Return to the **Create an API Token** dialog in the browser from step 2,
+   and click the **Create** button. The dialog title will become **Your new
+   API Token**. Click the **Copy** button in this dialog, and your API Token
+   will be copied to the macOS clipboard.
 5. Return to the workflow dialog from step 3, where you have already entered
    the email address associated with your Atlassian Account, and click the
    **Token Copied** button.
-
-![The "Configure Atlassian Account Token" dialog](configure-token.png)
 
 If all goes well, you will see a large text notification that the connection
 was created, along with a reminder to check your clipboard history. The
@@ -81,39 +83,40 @@ has the known prefix `ATATT` which current Atlassian API Tokens start with.
 
 ## Updating a token
 
-If you attempt to configure an email address that you have already
-configured, the workflow will warn you. It is impossible to recover the
-prior token if you erase it at this point, so you are warned before taking
-this action:
+If you attempt to connect an Atlassian Account by giving an email address
+that you have already configured, the workflow will warn you. It is
+impossible to recover the prior token if you overwrite it, so you are warned
+before taking this action:
 
 ![The "Update Token?" dialog](update-token.png)
 
 If you agree, a similar large text notification of the update, along with a
-reminded about the clipboard, is shown on your screen.
+reminder about the clipboard, is shown on your screen.
 
-## Configuring multiple Atlassian accounts
+## Connecting multiple Atlassian accounts
 
 You may have multiple Atlassian accounts, for example if you are a
 contractor working for multiple companies which provision such access, or if
 you have personal or open source projects as well as an employer account.
 
-You can follow the process above using the `a?` keyword to add as many
+You can follow the process above using the `a?` keyword to connect as many
 accounts as you require. It is likely that performance will be poor with
-many accounts, but personally i have two configured - work and personal -
-and performance is acceptable.
+many accounts, but I have two configured - work and personal - and
+performance is acceptable.
 
 If you use multiple accounts, then ensure that the account you are
 configuring is signed into Atlassian Account when you create the API Token.
 You can check the account by inspecting the avatar in the top right corner
-of the Atlassian Account page - hover over it or click it. You can switch
-accounts there. If your browser supports multiple profiles, the perform
-whatever actions are required to select the profile that links will open in
-before starting the process above. For example when using Safari, you should
-ensure the Atlassian Account page is not open in _any_ browser window, and
-then raise a window for the desired profile topmost, and then start the process.
+of the Atlassian Account page - hover over it or click on it to show the
+associated email. You can switch accounts there. If your browser supports
+multiple profiles, then perform whatever actions are required to select the
+profile that links will open in before starting the process above. For
+example when using Safari, you should ensure the Atlassian Account page is
+not open in _any_ browser window, and then raise a window for the desired
+profile frontmost, and then start the process.
 
 The `a?` workflow must be used for this as the `aa` workflow will perform
-searches once any accounts are configured. When raising the `a?` workflow,
+searches once any accounts are connected. When raising the `a?` workflow,
 you will see all configured accounts listed:
 
 ![Multiple accounts in the "a?" menu](multiple-accounts.png)
@@ -130,32 +133,33 @@ enabled/disabled status of all accounts:
 
 ![Disabled accounts in the "a?" menu](disabled-account.png)
 
-In this example, only `alice@example.com` will be searched. The API Token
-for `aliddel@example.org` remains on the macOS Keychain, and will be used
+In this example, only `aliddell@example.com` will be searched. The API Token
+for `alice@example.org` remains on the macOS Keychain, and will be used
 again if the account is re-enabled by actioning it in the `a?` keyword menu.
 
-## Removing configuration for Atlassian accounts
+## Disconnecting Atlassian Accounts
 
-If you are finished with an account and wish to remove the configuration,
-hold down the command key and action the account. Accounts can be removed
-when they are enabled or disabled, and the effect is the same. The item
-subtitle will change to indicate deletion will occur when you hold down command:
+If you no longer wish to use a specific account with this workflow and so
+wish to remove the configuration, open the `a?` keyword menu, hold down the
+command key and action the account. Accounts can be disconnected when they
+are enabled or disabled, and the effect is the same. The item subtitle will
+change to indicate deletion will occur when you hold down command:
 
-![Removing an account in the "a?" menu](delete-account.png)
+![Disconnecting an account in the "a?" menu](delete-account.png)
 
 Actioning it will raise a confirmation dialog, since this action cannot be
 undone:
 
-![The "Confirm Delete" dialog](delete-warning.png)
+![The "Confirm Disconnect Account" dialog](delete-warning.png)
 
-If you erroneously remove configuration for an Atlassian Account, and wish
-to use it again, you need to add it again using the process above, including
-issuing a new token.
+If you erroneously disconnect and remove configuration for an Atlassian
+Account, and wish to use it again, you need to add it again using the process
+above, including issuing a new token.
 
-Note that this configuration removal does not affect the Atlassian Account, nor
+Note that this disconnection process does not affect the Atlassian Account, nor
 does it affect the validity of the token. It only removes the workflow's
 configuration, including the token, from the macOS Keychain. After you
-confirm deletion, the workflow will again open the Atlassian Account API
+confirm disconnection, the workflow will again open the Atlassian Account API
 Token page, and remind you to revoke the token for the workflow:
 
 ![The "Revoke API Token" dialog](revoke-reminder.png)

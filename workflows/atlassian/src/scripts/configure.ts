@@ -3,7 +3,7 @@ import {
   AlfredScriptFilterItem,
 } from "@halfyak/alfred-workflows-jxa";
 import { queryAllAccounts } from "../security.ts";
-import { helpConfiguration } from "../urls.ts";
+import { atlassianApiTokens, helpConfiguration } from "../urls.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = scriptFilter((): AlfredScriptFilterItem[] => {
@@ -13,11 +13,9 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       title: "Connect an Atlassian Account",
       subtitle:
         "Browse to the Atlassian Tokens page & show a dialog to set up a connection.",
-      // We put the api-tokens url here so that it can be cmd+C'd. In a future
-      // refactor it would be nice to pass it through the workflow to centralize
-      // it's value in code, but that currently depends on how rework to share
-      // the two add account paths falls out.
-      arg: "https://id.atlassian.com/manage-profile/security/api-tokens",
+      // We put the api-tokens url here so that it can be cmd+C'd - actually opening
+      // it is done from code in credentialsDialog.ts
+      arg: atlassianApiTokens,
       icon: { path: "account.png" },
       variables: { action: "add" },
     },

@@ -88,6 +88,3 @@ export const displayDialogRepeat = <TAnswer>(
     }
   }
 };
-
-export const openUrl = (url: string) =>
-  $.NSWorkspace.sharedWorkspace.openURL($.NSURL.URLWithString(url));

@@ -8,11 +8,14 @@ import {
 import { readClipboard, writeClipboard } from "../pasteboard.ts";
 import { createAccount, updateAccountToken } from "../security.ts";
 import { hostFromUrl, suggestedTokenLabel } from "../sundry.ts";
-import { helpAdd } from "../urls.ts";
+import { atlassianApiTokens, helpAdd } from "../urls.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = runScript((): AlfredRunScriptJson => {
   writeClipboard(suggestedTokenLabel());
+  openUrl(atlassianApiTokens);
+  // Empirically i need to insert a delay here to give the browser time to become frontmost.
+  delay(0.1);
   const openHelpAndExplain = () => {
     openUrl(helpAdd);
     return `Configuration Help page has been opened in your browser. The tab is served from ${hostFromUrl(helpAdd)}.`;

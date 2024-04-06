@@ -4,7 +4,6 @@ Improvements that have occurred to me:
 
 - Use the Alfred Script Filter `match` field to allow filtering by account or
   site.
-- Add a more meaningful timeout to the api.atlassian.com requests.
 - There are two paths to add accounts - using `aa` with nothing configured, and
   also using `a?` in any case. These should share a bit more code at the
   typescript level. The flow when everything is disabled could similarly lead

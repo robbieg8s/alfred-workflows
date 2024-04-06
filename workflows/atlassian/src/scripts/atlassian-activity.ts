@@ -1,6 +1,6 @@
 import {
-  scriptFilter,
   AlfredScriptFilterItem,
+  scriptFilter,
 } from "@halfyak/alfred-workflows-jxa";
 
 import { queryAccountToken, queryAllAccounts } from "../security.ts";
@@ -38,6 +38,13 @@ const createAtlassianTimestampParser = () => {
   const fractionRe = /[.,]\d+/;
   return (timestamp: string) =>
     dateFormatter.dateFromString(timestamp.replace(fractionRe, ""));
+};
+
+const getApiTimeout = () => {
+  const timeout = parseInt(
+    $.NSProcessInfo.processInfo.environment.valueForKey("API_TIMEOUT").js,
+  );
+  return !Number.isNaN(timeout) ? timeout : 60;
 };
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
@@ -149,21 +156,25 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       });
       dataTasks.map((dataTask) => dataTask.resume);
       // While NSOperationQueue.waitUntilAllOperationsAreFinished looks
-      // attractive, it's no good here because there are no operations until
-      // the completion handlers fire. So we first wait till everything is
-      // done. Note that this test is not correct if we cancel or suspend
-      // tasks, but neither is the whole loop.
+      // attractive, it's no good here because there are no operations until the
+      // completion handlers fire.
+      // So just wait until nothing is running, or the timeout expires.  Note
+      // that this test is not correct if we cancel or suspend tasks, but
+      // neither is the whole loop.
+      const timeoutCutoff =
+        $.NSDate.now.dateByAddingTimeInterval(getApiTimeout());
       while (
         dataTasks.some(
           (dataTask) => $.NSURLSessionTaskStateRunning == dataTask.state,
-        )
+        ) &&
+        $.NSDate.now.timeIntervalSinceDate(timeoutCutoff) < 0
       ) {
         // Something still running, so let the run loop process completion
         // handlers. This does not yet have a timeout, although NSURLSession
         // does have a default at 60 seconds.
         $.NSRunLoop.currentRunLoop.acceptInputForModeBeforeDate(
           $.NSDefaultRunLoopMode,
-          $.NSDate.distantFuture,
+          timeoutCutoff,
         );
       }
       // I think this is race free - NSURLSessionTaskStateCompleted is
@@ -217,7 +228,8 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
         ["JiraIssue", renderJiraIssue],
       ]);
       // We want to merge the data from all the requests
-      const renderedActivityItems = Array.from(dataByAccount.entries())
+      const accountDataEntries = Array.from(dataByAccount.entries());
+      const renderedActivityItems = accountDataEntries
         .flatMap(([account, data]) =>
           data.activity.myActivity.all.edges
             .map(
@@ -263,15 +275,25 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
         .toSorted((left, right) => right.seconds - left.seconds)
         .map(({ item }) => item);
 
-      const renderedErrors = Array.from(errorByAccount.entries()).map(
-        ([account, error]) => ({
-          title: `${account}: failure contacting Atlassian cloud services`,
-          subtitle: error,
-          valid: false,
-        }),
-      );
+      const accountErrorEntries = Array.from(errorByAccount.entries());
+      const renderedErrors = accountErrorEntries.map(([account, error]) => ({
+        title: `${account}: failure contacting Atlassian cloud services`,
+        subtitle: error,
+        valid: false,
+      }));
 
-      return [...renderedErrors, ...renderedActivityItems];
+      // This might have double ups - but at worst that will be a neglible performance penantly in a rare case
+      const dataOrErrorAccounts = [
+        ...accountDataEntries,
+        ...accountErrorEntries,
+      ].map(([account]) => account);
+      const renderedTimeouts = enabledAccountItems
+        .filter(({ account }) => !dataOrErrorAccounts.includes(account))
+        .map(({ account }) => ({
+          title: `${account}: timed out contacting Atlassian cloud services`,
+          valid: false,
+        }));
+      return [...renderedErrors, ...renderedTimeouts, ...renderedActivityItems];
     }
   }
 });

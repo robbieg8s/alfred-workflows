@@ -1,5 +1,16 @@
 import { JxaPath } from "./api";
 
+export const createUserDateFormatter = () => {
+  const dateFormatter = $.NSDateFormatter.alloc.init;
+  dateFormatter.dateFormat =
+    $.NSDateFormatter.dateFormatFromTemplateOptionsLocale(
+      "HmEdMMM",
+      0,
+      $.NSLocale.currentLocale,
+    );
+  return (nsDate: unknown) => dateFormatter.stringFromDate(nsDate).js;
+};
+
 export class DetailedError extends Error {
   constructor(
     message: string,

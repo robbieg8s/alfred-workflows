@@ -1,5 +1,6 @@
 import {
   AlfredScriptFilterItem,
+  createUserDateFormatter,
   scriptFilter,
 } from "@halfyak/alfred-workflows-jxa";
 
@@ -12,17 +13,6 @@ import {
 } from "../sundry.ts";
 
 import activityQuery from "../activityQuery.graphql";
-
-const createUserDateFormatter = () => {
-  const dateFormatter = $.NSDateFormatter.alloc.init;
-  dateFormatter.dateFormat =
-    $.NSDateFormatter.dateFormatFromTemplateOptionsLocale(
-      "HmEdMMM",
-      0,
-      $.NSLocale.currentLocale,
-    );
-  return (nsDate: unknown) => dateFormatter.stringFromDate(nsDate).js;
-};
 
 const createAtlassianTimestampParser = () => {
   // It appears NSISO8601DateFormatter does not understand the fractions of

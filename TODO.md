@@ -12,10 +12,6 @@ Improvements that have occurred to me:
   automatically inferring the `defaultAnswer`/`textReturned` correspondence, or
   the button names?
 
-## Workflow Common
-
-- Share the NSDateFormatter setup and usage between workflows.
-
 ## Tooling
 
 - Add version bumping either to export-workflow or as a separate tool

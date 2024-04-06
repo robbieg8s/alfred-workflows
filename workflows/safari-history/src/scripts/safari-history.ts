@@ -1,4 +1,5 @@
 import {
+  createUserDateFormatter,
   executeProcess,
   scriptFilter,
   AlfredScriptFilterItem,
@@ -74,19 +75,9 @@ run = scriptFilter((query): AlfredScriptFilterItem[] => {
           }>);
     })
     .toSorted((left, right) => right.visit_time - left.visit_time);
-  const dateFormatter = $.NSDateFormatter.alloc.init;
-  dateFormatter.dateStyle = $.NSDateFormatterShortStyle;
-  dateFormatter.timeStyle = $.NSDateFormatterShortStyle;
-  dateFormatter.dateFormat =
-    $.NSDateFormatter.dateFormatFromTemplateOptionsLocale(
-      "HmEdMMM",
-      0,
-      $.NSLocale.currentLocale,
-    );
+  const dateFormatter = createUserDateFormatter();
   const formatDate = (time: number) =>
-    dateFormatter.stringFromDate(
-      $.NSDate.dateWithTimeIntervalSinceReferenceDate(time),
-    ).js;
+    dateFormatter($.NSDate.dateWithTimeIntervalSinceReferenceDate(time));
   return 0 === historyItems.length
     ? [{ title: "Nothing matching", valid: false }]
     : historyItems.map(({ title, url, visit_time }) => ({

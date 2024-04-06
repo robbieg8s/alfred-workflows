@@ -506,7 +506,31 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># Halfyak Atlassian workflow for Alfred
+
+This workflow provides search of activity on Atlassian Cloud Confluence and
+Jira. This workflow provides two keywords:
+
+- `aa` which searches recent Atlassian Activity
+- `a?` which is used to configure this workflow
+
+In order to use the workflow, an Atlassian Account must be connected, by
+providing an Atlassian API token to allow the workflow to make calls to
+Atlassian Cloud systems. The workflow will lead you through the process,
+and full details are provided in the [Configuration documentation](https://github.com/robbieg8s/alfred-workflows/blob/main/workflows/atlassian/docs/Configuration.md).
+
+Searches are performed by requesting all activity from the Atlassian API
+gateway's GraphQL endpoint, and then Alfred filters the results locally.
+
+## Security
+
+Tokens are stored in the macOS Keychain, which provides basic security, but an
+Attacker able to run processes on your computer could obtain them.
+
+## Legals
+
+This workflow is not affiliated with either Alfred nor Atlassian, this is a
+third party product and not a product offered by Atlassian.</string>
 	<key>uidata</key>
 	<dict>
 		<key>15EB73F5-4C33-4CE2-887E-259404FF5D44</key>
@@ -600,7 +624,9 @@
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/robbieg8s/alfred-workflows/tree/main/workflows/atlassian</string>
 </dict>
 </plist>

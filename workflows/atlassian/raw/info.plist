@@ -184,29 +184,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>credentialsDialog.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -236,7 +213,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>atlassian.js</string>
+				<string>atlassian-activity.js</string>
 				<key>subtext</key>
 				<string>Query recent activity on Atlassian cloud services</string>
 				<key>title</key>
@@ -252,6 +229,29 @@
 			<string>15EB73F5-4C33-4CE2-887E-259404FF5D44</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>connect-account.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -297,7 +297,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>toggleAccount.js</string>
+				<string>toggle-account.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -349,7 +349,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>deleteAccount.js</string>
+				<string>disconnect-account.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -466,7 +466,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>configure.js</string>
+				<string>configuration-menu.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -512,7 +512,7 @@
 		<key>15EB73F5-4C33-4CE2-887E-259404FF5D44</key>
 		<dict>
 			<key>note</key>
-			<string>Contact Api Gateway</string>
+			<string>Atlassian Activity</string>
 			<key>xpos</key>
 			<real>100</real>
 			<key>ypos</key>
@@ -537,7 +537,7 @@
 		<key>68FB8EA0-639E-4082-957D-3F168BEB9E37</key>
 		<dict>
 			<key>note</key>
-			<string>Display configuration outcome</string>
+			<string>Display Outcome</string>
 			<key>xpos</key>
 			<real>1100</real>
 			<key>ypos</key>
@@ -546,7 +546,7 @@
 		<key>77E97C69-083B-4EE0-8C51-9216C76E9319</key>
 		<dict>
 			<key>note</key>
-			<string>Toggle Enabled/Disabled for Account</string>
+			<string>Toggle Account</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
@@ -564,7 +564,7 @@
 		<key>B49B586C-1604-4E68-9158-A5E693D8666E</key>
 		<dict>
 			<key>note</key>
-			<string>Show Configuration Options</string>
+			<string>Configuration Menu</string>
 			<key>xpos</key>
 			<real>100</real>
 			<key>ypos</key>
@@ -573,7 +573,7 @@
 		<key>B94C15B0-D3AF-4370-AAEE-B493CA0E0564</key>
 		<dict>
 			<key>note</key>
-			<string>Show Credentials Dialog</string>
+			<string>Connect Account</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
@@ -582,7 +582,7 @@
 		<key>BC77FB44-5620-4E46-BDE2-A37C25E56F32</key>
 		<dict>
 			<key>note</key>
-			<string>Delete Account</string>
+			<string>Disconnect Account</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>

@@ -14,5 +14,4 @@ Improvements that have occurred to me:
 
 ## Tooling
 
-- Add version bumping either to export-workflow or as a separate tool
 - Add a lint-workflow which checks package.json and info.plist are still sensibly in sync.

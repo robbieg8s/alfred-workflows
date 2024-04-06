@@ -5,6 +5,7 @@ import path from "node:path";
 import { maybeEnoent, splitArrayBufferOn, ProcessBuilder } from "./sundry.ts";
 
 import parseInfoPlistXsl from "./parse-info-plist.xsl";
+import upversionInfoPlistXsl from "./upversion-info-plist.xsl";
 
 export const kInfoPlist = "info.plist";
 
@@ -12,7 +13,7 @@ export const kInfoPlist = "info.plist";
  * Class for the fields of interest in the Alfred `info.plist` file.
  *
  * The fields of this class here are coupled to the style sheet in {@link
- * parse-info-plist.xsl}.
+ * ./parse-info-plist.xsl}.
  */
 export class InfoPlist {
   constructor(
@@ -27,15 +28,15 @@ export class InfoPlist {
    * The name we use for the workflows repository directory.
    */
   repositoryName() {
-    return this.name.replaceAll(/[^\w]/g, "-").toLowerCase();
+    return this.name.replaceAll(/\W/g, "-").toLowerCase();
   }
 
   /**
    * The name we use for the installable Alfred workflow file.
-   * This is intended to be URL safe so it can be in a download link path.
+   * This is intended to be URL safe so that it can be in a download link path.
    */
   exportName() {
-    return this.name.replaceAll(/[^\w]/g, "_") + ".alfredworkflow";
+    return this.name.replaceAll(/\W/g, "_") + ".alfredworkflow";
   }
 
   describe() {
@@ -45,7 +46,7 @@ export class InfoPlist {
 }
 
 /**
- * Parse lines of output from {@link parse-info-plist.xsl}.
+ * Parse lines of output from {@link ./parse-info-plist.xsl}.
  */
 const splitKeyValue = (keyValue: string) => {
   const space = keyValue.indexOf(" ");
@@ -58,25 +59,43 @@ const splitKeyValue = (keyValue: string) => {
 };
 
 /**
- * Use `xsltproc` and {@link parse-info-plist.xsl} to parse the info.plist into
- * a form we can easily turn into key value pairs.
+ * Run `xsltproc` with stylesheet `xsl` to process `xml` with any additional `options`.
  */
-const parseInfoPlist = async (infoPlistPath: string) => {
-  const xsltproc = new ProcessBuilder(
+const xsltproc = async (xsl: string, xml: string, ...options: string[]) => {
+  const xsltprocProcess = new ProcessBuilder(
     "xsltproc",
     "--nonet",
     "--novalid",
-    path.join(import.meta.dirname, parseInfoPlistXsl),
-    infoPlistPath,
+    ...options,
+    path.join(import.meta.dirname, xsl),
+    xml,
   );
   try {
-    return await xsltproc.run();
+    return await xsltprocProcess.run();
   } catch (error) {
-    throw new Error(`Failed to process (xsltproc) ${infoPlistPath}`, {
+    throw new Error(`Failed to process (xsltproc) ${xml} (using ${xsl})`, {
       cause: error,
     });
   }
 };
+/**
+ * Use `xsltproc` and {@link ./upversion-info-plist.xsl} to increase the patch
+ * version level in `infoPlistPath` by 1.
+ */
+export const upversionInfoPlist = async (infoPlistPath: string) =>
+  await xsltproc(
+    upversionInfoPlistXsl,
+    infoPlistPath,
+    "--output",
+    infoPlistPath,
+  );
+
+/**
+ * Use `xsltproc` and {@link ./parse-info-plist.xsl} to parse the info.plist into
+ * a form we can easily turn into key value pairs.
+ */
+const parseInfoPlist = async (infoPlistPath: string) =>
+  xsltproc(parseInfoPlistXsl, infoPlistPath);
 
 interface ReadInfoPlistOptions<T> {
   noDir?: (infoPlistPath: string) => T;

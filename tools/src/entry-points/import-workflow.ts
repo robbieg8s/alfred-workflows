@@ -7,7 +7,7 @@ import path from "node:path";
 
 import { runCli, reportAs, reportableError } from "../cli.ts";
 import { kInstallation, kRaw } from "../fs-layout.ts";
-import { splitArrayBufferOn, ProcessBuilder } from "../sundry.ts";
+import { gitCz, gitUpdateIndex } from "../git.ts";
 import { syncOutcomes, SyncAction } from "../sync.ts";
 import { readInfoPlist, verifySymlink } from "../info-plist.ts";
 import {
@@ -64,7 +64,7 @@ runCli(async () => {
     // We ignore files in kDist - meaning that if sync sees a file missing in
     // kRaw it won't ask to copy it, because actually the file in kInstallation
     // comes from kDist, not kRaw. If this is wrong, the next bundle-workflow
-    // will see it as a clash and we can resolve then without losing data.
+    // will see it as a clash, and we can resolve then without losing data.
     new Set(await distFilenames()),
   );
 
@@ -94,26 +94,23 @@ runCli(async () => {
     console.log("All files imported and up to date");
   } else {
     // Check that anything that would result in change is reversible using git
-    const git = async (...args: string[]) =>
-      await new ProcessBuilder("git", ...args).run();
-    // The git commands we use inspect the index, and since we've possibly
-    // messed with timestamps, we need to refresh before we keep going, but we
-    // don't care about the state from the command, hence the -q
-    await git("update-index", "-q", "--refresh");
+    // Ensure git index is in sync with local file timestamps
+    await gitUpdateIndex();
     const gitFiles = changeActions.map(({ name }) => name);
+    const gitCzRawFiles = async (
+      kind: string,
+      command: string,
+      ...args: string[]
+    ) => ({
+      kind,
+      files: await gitCz(kRaw, command, ...args, "--", ...gitFiles),
+    });
     const diffOptions = ["--name-only", "--relative"];
-    const gitResponses = (
-      await Promise.all(
-        [
-          ["staged", "diff-index", ...diffOptions, "--cached", "HEAD"],
-          ["unstaged", "diff-files", ...diffOptions],
-          ["untracked", "ls-files", "--others", "--exclude-standard"],
-        ].map(async ([kind, command, ...args]) => ({
-          kind,
-          out: await git("-C", kRaw, command, "-z", ...args, "--", ...gitFiles),
-        })),
-      )
-    ).map(({ kind, out }) => ({ kind, files: splitArrayBufferOn(out, 0) }));
+    const gitResponses = await Promise.all([
+      gitCzRawFiles("staged", "diff-index", ...diffOptions, "--cached", "HEAD"),
+      gitCzRawFiles("unstaged", "diff-files", ...diffOptions),
+      gitCzRawFiles("untracked", "ls-files", "--others", "--exclude-standard"),
+    ]);
     const gitProblems = gitResponses.flatMap(({ kind, files }) => {
       const filesCount = files.length;
       return 0 === filesCount

@@ -28,12 +28,12 @@ consider:
 
 To connect your Atlassian Account, you can use the `a?` keyword:
 
-![The "Connect an Atlassian Account" menu item](add-first-account.png)
+![The "Connect an Atlassian Account" menu item](connect-account-menu.png)
 
 If you try to use the search keyword `aa` and no accounts have been connected,
 the workflow will prompt you to connect an account also:
 
-![The "No Atlassian Token" menu item](no-atlassian-token.png)
+![The "No Atlassian Token" menu item](no-atlassian-token-menu.png)
 
 Actioning either item will commencing the token save flow. Three things will
 happen at this point:
@@ -46,7 +46,7 @@ happen at this point:
 3. A dialog titled "Connect Atlassian Account " will be presented by the
    workflow.
 
-![The "Connect Atlassian Account" dialog](configure-token.png)
+![The "Connect Atlassian Account" dialog](connect-account-dialog.png)
 
 The intended flow at this point is
 
@@ -74,7 +74,7 @@ was created, along with a reminder to check your clipboard history. The
 workflow automatically clears the system clipboard as soon as it can after
 saving the token.
 
-![The "Created ..." workflow response](created-largetext.png)
+![The "Connected ..." workflow response](connected-response.png)
 
 In case of problems, the workflow will attempt to provide help. For example,
 it performs some basic validation of the provided email address. It also
@@ -88,7 +88,7 @@ that you have already configured, the workflow will warn you. It is
 impossible to recover the prior token if you overwrite it, so you are warned
 before taking this action:
 
-![The "Update Token?" dialog](update-token.png)
+![The "Update Token?" dialog](update-token-dialog.png)
 
 If you agree, a similar large text notification of the update, along with a
 reminder about the clipboard, is shown on your screen.
@@ -145,12 +145,12 @@ command key and action the account. Accounts can be disconnected when they
 are enabled or disabled, and the effect is the same. The item subtitle will
 change to indicate deletion will occur when you hold down command:
 
-![Disconnecting an account in the "a?" menu](delete-account.png)
+![Disconnecting an account in the "a?" menu](disconnect-account-menu.png)
 
 Actioning it will raise a confirmation dialog, since this action cannot be
 undone:
 
-![The "Confirm Disconnect Account" dialog](delete-warning.png)
+![The "Confirm Disconnect Account" dialog](disconnect-account-dialog.png)
 
 If you erroneously disconnect and remove configuration for an Atlassian
 Account, and wish to use it again, you need to add it again using the process
@@ -162,7 +162,7 @@ configuration, including the token, from the macOS Keychain. After you
 confirm disconnection, the workflow will again open the Atlassian Account API
 Token page, and remind you to revoke the token for the workflow:
 
-![The "Revoke API Token" dialog](revoke-reminder.png)
+![The "Revoke API Token" dialog](revoke-token-dialog.png)
 
 It is good security practice to only use tokens for a single purpose, and to
 revoke them when you no longer need them. This ensures that if they were

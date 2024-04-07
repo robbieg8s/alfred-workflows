@@ -23,23 +23,23 @@ export class DetailedError extends Error {
 export const detailedError = (message: string, ...details: string[]) =>
   new DetailedError(message, details);
 
-interface DisplayDialogDetails {
+interface DisplayDialogDetails<TButton> {
   defaultAnswer?: string;
   hiddenAnswer?: boolean;
-  buttons?: string[];
+  buttons?: TButton[];
   defaultButton?: string | number;
   cancelButton?: string | number;
   withTitle?: string;
   /**
    * This can also be a resource name or ID, but i'm not using these, and it
-   * would removes the useful typechecking on the string.
+   * would remove the useful typechecking on the string.
    */
   withIcon?: "stop" | "note" | "caution" | JxaPath;
   givingUpAfter?: number;
 }
 
-interface DisplayDialogResponse {
-  buttonReturned: string;
+interface DisplayDialogResponse<TButton> {
+  buttonReturned: TButton;
   textReturned?: string;
   gaveUp?: boolean;
 }
@@ -50,14 +50,17 @@ interface DisplayDialogResponse {
  * This uses the OSAScript Application.displayDialog, but translates the cancel
  * exception to returning undefined.
  */
-export const displayDialog = (
+export const displayDialog = <TButton extends string>(
   text: string,
-  details: DisplayDialogDetails,
-): DisplayDialogResponse | undefined => {
+  details: DisplayDialogDetails<TButton>,
+): DisplayDialogResponse<TButton> | undefined => {
   const application = Application.currentApplication();
   application.includeStandardAdditions = true;
   try {
-    return application.displayDialog(text, details) as DisplayDialogResponse;
+    return application.displayDialog(
+      text,
+      details,
+    ) as DisplayDialogResponse<TButton>;
   } catch (error) {
     // Yes, displayDialog really throws for cancel. It's not trivial to infer
     // the cancel button since macOS decides it, so just return undefined.
@@ -81,12 +84,12 @@ export const displayDialog = (
  * invoked again when the repeat dialog is closed.  If `repeat` returns anything
  * else, it is returned to the caller of {@link displayDialogRepeat}.
  */
-export const displayDialogRepeat = <TAnswer>(
+export const displayDialogRepeat = <const TButton extends string, TAnswer>(
   text: string,
-  details: DisplayDialogDetails,
+  details: DisplayDialogDetails<TButton>,
   repeat: (
-    response: DisplayDialogResponse | undefined,
-    details: DisplayDialogDetails,
+    response: DisplayDialogResponse<TButton> | undefined,
+    details: DisplayDialogDetails<TButton>,
   ) => string | TAnswer,
 ) => {
   let response = displayDialog(text, details);

@@ -52,6 +52,10 @@ Atlassian Account Email:`;
       // easier.  Note that textReturned won't be undefined according to the
       // displayDialog documentation, since we provided defaultAnswer, but i
       // haven't explained that to typescript yet, so just help it along.
+      // I think something along the lines of
+      // https://stackoverflow.com/questions/54416282 could be used, but i
+      // stopped trying to make it work when it exceeded my complexity threshold
+      // for this case.
       const account = response?.textReturned ?? "";
       details.defaultAnswer = account;
       // Note response is undefined when cancelled, the form of the conditions

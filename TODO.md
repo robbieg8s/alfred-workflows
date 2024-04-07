@@ -2,8 +2,6 @@ Improvements that have occurred to me:
 
 ## Atlassian
 
-- Use the Alfred Script Filter `match` field to allow filtering by account or
-  site.
 - There are two paths to add accounts - using `aa` with nothing configured, and
   also using `a?` in any case. These should share a bit more code at the
   typescript level. The flow when everything is disabled could similarly lead

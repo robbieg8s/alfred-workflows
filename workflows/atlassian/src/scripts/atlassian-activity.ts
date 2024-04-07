@@ -195,6 +195,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           // a path component, and URLWithStringRelativeToURL strips the base
           // path component in this case.
           arg: base + webUi,
+          match: [data.title, site, account].join(" "),
         };
       };
       const renderJiraIssue = (

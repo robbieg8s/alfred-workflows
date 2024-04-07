@@ -7,7 +7,7 @@ export interface JsonObject {
 }
 export type Json = string | number | boolean | null | Json[] | JsonObject;
 
-const isJsonString = (json: Json): json is string => {
+export const isJsonString = (json: Json): json is string => {
   return "string" === typeof json;
 };
 
@@ -15,7 +15,7 @@ export const toJsonString = (json: Json): string | undefined => {
   return isJsonString(json) ? json : undefined;
 };
 
-const isJsonNumber = (json: Json): json is number => {
+export const isJsonNumber = (json: Json): json is number => {
   return "number" === typeof json;
 };
 
@@ -23,7 +23,7 @@ export const toJsonNumber = (json: Json): number | undefined => {
   return isJsonNumber(json) ? json : undefined;
 };
 
-const isJsonBoolean = (json: Json): json is boolean => {
+export const isJsonBoolean = (json: Json): json is boolean => {
   return "boolean" === typeof json;
 };
 
@@ -31,7 +31,7 @@ export const toJsonBoolean = (json: Json): boolean | undefined => {
   return isJsonBoolean(json) ? json : undefined;
 };
 
-const isJsonNull = (json: Json): json is null => {
+export const isJsonNull = (json: Json): json is null => {
   return null === json;
 };
 
@@ -39,7 +39,7 @@ export const toJsonNull = (json: Json): null | undefined => {
   return isJsonNull(json) ? json : undefined;
 };
 
-const isJsonArray = (json: Json): json is Json[] => {
+export const isJsonArray = (json: Json): json is Json[] => {
   return Array.isArray(json);
 };
 
@@ -47,7 +47,7 @@ export const toJsonArray = (json: Json): Json[] | undefined => {
   return isJsonArray(json) ? json : undefined;
 };
 
-const isJsonObject = (json: Json): json is JsonObject => {
+export const isJsonObject = (json: Json): json is JsonObject => {
   return "object" === typeof json && !Array.isArray(json);
 };
 

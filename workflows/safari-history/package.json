@@ -1,7 +1,7 @@
 {
   "name": "@halfyak/alfred-workflows-safari-history",
   "version": "1.0.0",
-  "description": "An Alfred Workflow for searching and opening Safari history",
+  "description": "Search and open Safari History",
   "scripts": {
     "tsc": "tsc --noEmit"
   },

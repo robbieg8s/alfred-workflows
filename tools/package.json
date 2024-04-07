@@ -14,6 +14,7 @@
     "export-workflow": "./dist/export-workflow.js",
     "import-workflow": "./dist/import-workflow.js",
     "link-workflow": "./dist/link-workflow.js",
+    "lint-workflow": "./dist/lint-workflow.js",
     "update-workflow": "./dist/update-workflow.js",
     "upversion-workflow": "./dist/upversion-workflow.js"
   },

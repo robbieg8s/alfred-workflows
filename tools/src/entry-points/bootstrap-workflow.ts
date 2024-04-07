@@ -8,7 +8,7 @@ import { listCurrentWorkflows } from "../alfred.ts";
 import { reportAs, runCli } from "../cli.ts";
 import { kInstallation, kRaw } from "../fs-layout.ts";
 import { kInfoPlist, readInfoPlist } from "../info-plist.ts";
-import { helpImportWorkflow } from "../workflow.ts";
+import { helpImportWorkflow, packageName } from "../workflow.ts";
 
 import templatePackageJson from "../template-package.json";
 import templateTsconfigJson from "../template-tsconfig.json";
@@ -63,13 +63,13 @@ runCli(async () => {
       await fs.mkdir(path.join(workflowPath, kRaw));
       const packageJson = {
         // And update the fields we can infer from the infoPlist
-        name: `@halfyak/alfred-workflows-${repositoryName}`,
+        name: packageName(repositoryName),
         version: infoPlist.version ?? "1.0.0",
         description: infoPlist.description ?? infoPlist.name,
         author: infoPlist.createdby ?? null,
-        // Bring in current boiler plate - the template is designed not to clash
-        // with fields here, and we want the object fields in a specific order,
-        // and empirically they are preserved from this definition.
+        // Bring in current boilerplate - the template is designed not to clash
+        // with fields here, and we want the fields this object in a specific
+        // order, and empirically they are preserved from this definition.
         ...templatePackageJson,
       };
       await fs.writeFile(

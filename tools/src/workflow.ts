@@ -31,6 +31,9 @@ export const helpImportWorkflow = makeHelp("import-workflow");
 export const helpLinkWorkflow = makeHelp("link-workflow");
 export const helpUpdateWorkflow = makeHelp("update-workflow");
 
+export const packageName = (repositoryName: string) =>
+  `@halfyak/alfred-workflows-${repositoryName}`;
+
 export const verifyBundleid = async (
   thisDir: string,
   thisInfoPlist: InfoPlist,

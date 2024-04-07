@@ -3,22 +3,13 @@ import {
   AlfredScriptFilterItem,
 } from "@halfyak/alfred-workflows-jxa";
 import { queryAllAccounts } from "../security.ts";
-import { atlassianApiTokens, helpConfiguration } from "../urls.ts";
+import { connectItem, helpItem } from "../common-items.ts";
 
 // The run global is declared in "@halfyak/alfred-workflows-jxa" - see api.d.ts
 run = scriptFilter((): AlfredScriptFilterItem[] => {
   const accounts = queryAllAccounts();
   return [
-    {
-      title: "Connect an Atlassian Account",
-      subtitle:
-        "Browse to the Atlassian Tokens page & show a dialog to set up a connection.",
-      // We put the api-tokens url here so that it can be cmd+C'd - actually opening
-      // it is done from code in credentialsDialog.ts
-      arg: atlassianApiTokens,
-      icon: { path: "account.png" },
-      variables: { action: "add" },
-    },
+    connectItem,
     ...accounts
       // Sort by account name. This is using localeCompare for convenience, due
       // to the lack of String.compare.
@@ -35,17 +26,11 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           mods: {
             cmd: {
               subtitle: "Disconnect this account.",
-              variables: { action: "delete" },
+              variables: { action: "disconnect" },
             },
           },
         }),
       ),
-    {
-      title: "Show help for configuring connections",
-      subtitle: "Browse to the help page about configuring this workflow.",
-      arg: helpConfiguration,
-      icon: { path: "help.png" },
-      variables: { action: "help" },
-    },
+    helpItem,
   ];
 });

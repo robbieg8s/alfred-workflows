@@ -13,6 +13,7 @@ import {
 } from "../sundry.ts";
 
 import activityQuery from "../activityQuery.graphql";
+import { connectItem, helpItem } from "../common-items.ts";
 
 const createAtlassianTimestampParser = () => {
   // It appears NSISO8601DateFormatter does not understand the fractions of
@@ -41,14 +42,7 @@ const getApiTimeout = () => {
 run = scriptFilter((): AlfredScriptFilterItem[] => {
   const accountItems = queryAllAccounts();
   if (0 === accountItems.length) {
-    return [
-      {
-        title: "No Atlassian Token - Connect an Atlassian Account?",
-        subtitle:
-          "Action this to browse to the Atlassian Tokens page & show a dialog to set up a connection.",
-        icon: { path: "account.png" },
-      },
-    ];
+    return [connectItem, helpItem];
   } else {
     const enabledAccountItems = accountItems.filter(
       ({ details: { enabled } }) => enabled,
@@ -59,7 +53,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           title: "All connected Atlassian Accounts are disabled",
           subtitle: "Use the configuration workflow a? to toggle some on.",
           icon: { path: "disabled.png" },
-          valid: false,
+          variables: { action: "configure" },
         },
       ];
     } else {
@@ -196,6 +190,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           // path component in this case.
           arg: base + webUi,
           match: [data.title, site, account].join(" "),
+          variables: { action: "open" },
         };
       };
       const renderJiraIssue = (
@@ -211,6 +206,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
           title: fieldsById.edges[0].node.text,
           subtitle: `${key} (${siteFromUrl(webUrl)}/${account}) on ${userDateFormatter(nsDate)}`,
           arg: webUrl,
+          variables: { action: "open" },
         };
       };
       const renderersByTypename = new Map([
@@ -273,7 +269,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
         valid: false,
       }));
 
-      // This might have double ups - but at worst that will be a neglible performance penantly in a rare case
+      // This might have double ups - but at worst that will be a negligible performance penalty in a rare case
       const dataOrErrorAccounts = [
         ...accountDataEntries,
         ...accountErrorEntries,

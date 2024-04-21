@@ -12,6 +12,7 @@ import { helpImportWorkflow, packageName } from "../workflow.ts";
 
 import templatePackageJson from "../template-package.json";
 import templateTsconfigJson from "../template-tsconfig.json";
+import { partition } from "../sundry.js";
 
 runCli(async () => {
   // The repository subdirectory for the workflows
@@ -20,34 +21,55 @@ runCli(async () => {
   // don't want to assume all workflows are installed.
   const sourceBundleids = new Set(
     await Promise.all(
-      (await fs.readdir(kWorkflows)).map(
-        async (workflowDir) =>
-          (await readInfoPlist(path.join(kWorkflows, workflowDir, kRaw)))
-            .bundleid,
-      ),
+      (await fs.readdir(kWorkflows))
+        .filter((workflowDir) => !workflowDir.startsWith("."))
+        .map(
+          async (workflowDir) =>
+            (await readInfoPlist(path.join(kWorkflows, workflowDir, kRaw)))
+              .bundleid,
+        ),
     ),
   );
   // Find installed workflows
   const { workflows, warnings } = await listCurrentWorkflows();
   // Notify but ignore bad workflows
   warnings.forEach((warning) => console.log(warning));
-  // Filter down to those we want to bootstrap. There are two parts to the
-  // filter. Firstly, use process.argv as a list of bundle prefixes, so that we
-  // can have workflows installed that aren't part of this machinery. Secondly,
-  // ignore those from above for which we already have subdirectories.
-  // Discard executable (node) and script from argv
+  // Discard executable (node) and script from argv to get just CLI arguments
+  // which are prefixes to filter by.
   const prefixes = process.argv.slice(2);
-  const needsBootstrap = workflows.filter(
+  // Filter down to those we want to bootstrap. We ignore those from above for
+  // which we already have subdirectories. After this, we bootstrap those which
+  // match a prefix (from process.argv above), and report those we are skipping.
+  // This allows us to have workflows installed that aren't part of this
+  // machinery, but still know what we'd need to include to pull thigns in.
+  const [included, skipped] = partition(
+    workflows.filter(
+      ({ infoPlist: { bundleid } }) => !sourceBundleids.has(bundleid),
+    ),
     ({ infoPlist: { bundleid } }) =>
-      prefixes.some((prefix) => bundleid.startsWith(prefix)) &&
-      !sourceBundleids.has(bundleid),
+      prefixes.some((prefix) => bundleid.startsWith(prefix)),
   );
-  const needsBootstrapCount = needsBootstrap.length;
-  if (0 == needsBootstrapCount) {
-    console.log(`No new workflows for prefixes: ${prefixes}`);
+  const skippedCount = skipped.length;
+  if (0 !== skippedCount) {
+    console.log(`Skipping ${skippedCount} workflow(s) not matching prefixes.`);
+    for (const {
+      infoPlist: { bundleid, name },
+    } of skipped) {
+      console.log(`  ${bundleid}: ${name}`);
+    }
+  }
+  const includedCount = included.length;
+  if (0 === includedCount) {
+    if (0 === prefixes.length) {
+      console.log(
+        "Provide bundleid prefixes to bootstrap-worfklow to select workflows to bootstrap",
+      );
+    } else {
+      console.log(`No new workflows for prefixes: ${prefixes}`);
+    }
   } else {
-    console.log(`Found ${needsBootstrapCount} workflow(s) to bootstrap`);
-    for (const { target, infoPlist } of needsBootstrap) {
+    console.log(`Found ${includedCount} workflow(s) to bootstrap.`);
+    for (const { target, infoPlist } of included) {
       const repositoryName = infoPlist.repositoryName();
       console.log();
       console.log(

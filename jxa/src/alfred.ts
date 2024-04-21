@@ -10,7 +10,10 @@ import { DetailedError } from "./sundry.ts";
 interface AlfredScriptFilterItemBase {
   subtitle?: string;
   arg?: string | string[];
-  icon?: { path: string };
+  icon?: {
+    type?: "fileicon" | "filetype";
+    path: string;
+  };
   valid?: boolean;
   variables?: { [k: string]: string };
 }
@@ -78,7 +81,9 @@ export interface AlfredRunScriptJson {
   variables?: { [k: string]: string };
 }
 
-type RunScriptHandler = (query: string | undefined) => AlfredRunScriptJson;
+type RunScriptHandler = (
+  query: string | undefined,
+) => AlfredRunScriptJson | void;
 
 /**
  * Runs a run script handler, JSONifying the output for Alfred.

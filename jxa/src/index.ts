@@ -6,6 +6,7 @@
 // https://www.npmjs.com/package/@jxa/global-type
 // https://github.com/JXA-userland/JXA/tree/master/packages/@jxa/global-type
 export * from "./api.js";
+export * from "./application.js";
 
 // These are just regular exports of helpers
 export * from "./alfred.ts";

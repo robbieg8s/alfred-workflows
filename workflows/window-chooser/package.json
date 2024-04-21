@@ -1,0 +1,19 @@
+{
+  "name": "@halfyak/alfred-workflows-window-chooser",
+  "version": "1.0.0",
+  "description": "Select a window by title / application text match",
+  "type": "module",
+  "author": "Robbie Gates",
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@halfyak/alfred-workflows-jxa": "workspace:"
+  },
+  "devDependencies": {
+    "@halfyak/alfred-workflows-tools": "workspace:",
+    "typescript": "5.3.3"
+  }
+}

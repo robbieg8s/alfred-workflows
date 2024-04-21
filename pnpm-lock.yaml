@@ -72,6 +72,19 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
+  workflows/window-chooser:
+    dependencies:
+      '@halfyak/alfred-workflows-jxa':
+        specifier: 'workspace:'
+        version: link:../../jxa
+    devDependencies:
+      '@halfyak/alfred-workflows-tools':
+        specifier: 'workspace:'
+        version: link:../../tools
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:

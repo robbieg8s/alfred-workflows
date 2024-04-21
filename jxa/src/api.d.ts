@@ -1,6 +1,11 @@
 // See Global Properties on
 // https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW2
 
+import { Application, SystemEvents } from "./application.js";
+
+// Some of this is inspired by https://github.com/JXA-userland/JXA, and maybe
+// i should use that directly, but i need to understand it more fully first.
+
 declare const jxaPathTag: unique symbol;
 /**
  * An opaque type for the return value of the Path global.
@@ -24,7 +29,13 @@ declare global {
   // This is the global which is used for the handler when invoking js via an osascript #!
   let run: (argv: string[]) => string;
   // This is the global for accessing scripting additions
-  const Application: any;
+  const Application: {
+    currentApplication: () => Application;
+    new (bundleIdentifierOrName: string): Application;
+    (bundleIdentifierOrName: string): Application;
+    (name: "System Events"): Application & SystemEvents;
+  };
+
   // This is the global for manipulating the filesystem
   const Path: (path: string) => JxaPath;
 }

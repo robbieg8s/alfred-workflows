@@ -2,6 +2,7 @@
   "name": "@halfyak/alfred-workflows-atlassian",
   "version": "1.0.0",
   "description": "Query Atlassian Activity",
+  "type": "module",
   "author": "Robbie Gates",
   "scripts": {
     "tsc": "tsc --noEmit"

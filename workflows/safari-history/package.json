@@ -2,6 +2,7 @@
   "name": "@halfyak/alfred-workflows-safari-history",
   "version": "1.0.0",
   "description": "Search and open Safari History",
+  "type": "module",
   "scripts": {
     "tsc": "tsc --noEmit"
   },

@@ -2,6 +2,7 @@
   "name": "@halfyak/alfred-workflows-jxa",
   "version": "1.0.0",
   "description": "Types and libraries for Alfred Workflows using JXA/ObjC Bridge from Typescript",
+  "type": "module",
   "scripts": {
     "tsc": "tsc --noEmit"
   },

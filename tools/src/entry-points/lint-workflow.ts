@@ -46,6 +46,7 @@ runCli(async () => {
         ...checkField("version", infoPlist.version),
         ...checkField("description", infoPlist.description),
         ...checkField("author", infoPlist.createdby),
+        ...checkField("type", "module"),
       ];
     }
   };

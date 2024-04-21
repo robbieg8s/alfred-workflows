@@ -1,4 +1,4 @@
-import { JxaPath } from "./api";
+import { JxaPath } from "./api.js";
 
 export const createUserDateFormatter = () => {
   const dateFormatter = $.NSDateFormatter.alloc.init;

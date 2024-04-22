@@ -28,11 +28,13 @@ in executables for support rather than libraries. The tooling is intended to be
 runnable in a suitably configured docker container also, but this is future
 work.
 
-The tooling workflow has five components:
+The tooling workflow has eight tools:
 
 - bootstrap-workflow to bring a new Alfred workflow under source control
 - bundle-workflow to transpile for osascript
 - export-workflow to build distributable workflows
 - import-workflow to copy changes from Alfred UI to git workspace
 - link-workflow to connect a git workspace to an installed workflow
+- lint-workflow to check consistency between Alfred metadata and `package.json`
 - update-workflow to copy built workflow from git workspace to live install
+- upversion-workflow to bump the patch version in the Alfred metadata

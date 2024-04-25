@@ -11,7 +11,8 @@ interface SystemInformation {
 interface Window {
   id: () => number;
   set index(index: number);
-  miniaturized: () => boolean;
+  get miniaturized(): () => boolean;
+  set miniaturized(isMiniaturized: boolean);
   name: () => string;
   visible: () => boolean;
 }

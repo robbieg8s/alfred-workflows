@@ -31,9 +31,11 @@ run = runScript((query) => {
     throw detailedError(`Found multiple (${windowsCount}) matching windows?`);
   } else {
     const [window] = windows;
-    // Empirically, this will unminimize the window also if needed, as well as
-    // bringing it to the front of the application's windows.
+    // We set the index, bringing the window to the front of the application's windows, and
+    // also clean any miniaturization. Empirically the former is often enough, but if all a
+    // applications windows are miniaturized, setting miniaturized is also necessary.
     window.index = 1;
+    window.miniaturized = false;
     // Then switch to the other application
     switchTo(processId);
   }

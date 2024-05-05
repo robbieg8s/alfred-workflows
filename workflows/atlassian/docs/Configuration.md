@@ -67,7 +67,7 @@ The intended flow at this point is
    will be copied to the macOS clipboard.
 5. Return to the workflow dialog from step 3, where you have already entered
    the email address associated with your Atlassian Account, and click the
-   **Token Copied** button.
+   **I have copied the Token** button.
 
 If all goes well, you will see a large text notification that the connection
 was created, along with a reminder to check your clipboard history. The
@@ -78,8 +78,9 @@ saving the token.
 
 In case of problems, the workflow will attempt to provide help. For example,
 it performs some basic validation of the provided email address. It also
-inspects the clipboard after you click **Token Copied** to ensure the token
-has the known prefix `ATATT` which current Atlassian API Tokens start with.
+inspects the clipboard after you click **I have copied the Token** to ensure
+that the token has the known prefix `ATATT` which current Atlassian API Tokens
+start with.
 
 ## Updating a token
 

@@ -29,13 +29,14 @@ run = runScript((): AlfredRunScriptJson => {
   // See https://www.rfc-editor.org/rfc/rfc5322#section-3.2.3
   const accountRe =
     /^[!#$%&'*+/0-9=?A-Z^_`a-z{|}~.-]+@[0-9A-Za-z][0-9A-Za-z-]*(\.[0-9A-Za-z][0-9A-Za-z-]*)*$/;
+  const tokenCopied = "I have copied the Token";
   const createText = (
     more?: string,
   ) => `Enter the Atlassian Account email in the text box below.
 The Atlassian Account API Tokens page has been opened in your browser.
 Verify the account matches that in the top right corner profile menu with your avatar.
 Use the Create API token button - a suggested Label has been placed on your clipboard.
-Press the Copy button once the token is generated, then press Token Copied below.
+Press the Copy button once the token is generated, then press "${tokenCopied}" below.
 ${more ? `\n${more}\n` : ""}
 Atlassian Account Email:`;
   const createAnswer = displayDialogRepeat(
@@ -43,8 +44,8 @@ Atlassian Account Email:`;
     {
       withTitle: "Connect Atlassian Account",
       defaultAnswer: "",
-      buttons: ["Cancel", "Help", "Token Copied"],
-      defaultButton: "Token Copied",
+      buttons: ["Cancel", "Help", tokenCopied],
+      defaultButton: tokenCopied,
       withIcon: Path("key.icns"),
     },
     (response, details) => {
@@ -62,7 +63,7 @@ Atlassian Account Email:`;
       // here is chosen for readability and failure modes.
       if (response?.buttonReturned === "Help") {
         return createText(openHelpAndExplain());
-      } else if (response?.buttonReturned === "Token Copied") {
+      } else if (response?.buttonReturned === tokenCopied) {
         if (!accountRe.test(account)) {
           return createText("Account does not look like a valid email");
         }

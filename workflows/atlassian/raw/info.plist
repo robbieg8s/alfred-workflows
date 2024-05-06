@@ -721,7 +721,7 @@ third party product and not a product offered by Atlassian.</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/robbieg8s/alfred-workflows/tree/main/workflows/atlassian</string>
 </dict>

@@ -48,7 +48,7 @@ export const halfyakService = cfString("org.halfyak.alfredapp.atlassian");
  * Return the host from a url string.
  *
  * Empirically, osascript does not provide the JavaScript URL class. Really we
- * should implement is using NSURL, but for now this will do.
+ * should implement it using NSURL, but for now this will do.
  */
 export const hostFromUrl = (url: string) => url.split("/")[2];
 

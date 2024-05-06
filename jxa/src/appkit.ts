@@ -2,8 +2,14 @@ import { detailedError } from "./sundry.ts";
 
 ObjC.import("AppKit");
 
-export const openUrl = (url: string) =>
-  $.NSWorkspace.sharedWorkspace.openURL($.NSURL.URLWithString(url));
+export const openUrl = (url: string) => {
+  const result = $.NSWorkspace.sharedWorkspace.openURL(
+    $.NSURL.URLWithString(url),
+  );
+  // Empirically i need to insert a delay here to give the browser time to become frontmost.
+  delay(0.1);
+  return result;
+};
 
 export const switchTo = (pid: number) => {
   const other =

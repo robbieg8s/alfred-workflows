@@ -36,8 +36,6 @@ This cannot be undone.`,
   } else {
     deleteAccount(account);
     openUrl(atlassianApiTokens);
-    // Empirically i need to insert a delay here to give the browser time to become frontmost.
-    delay(0.1);
     displayDialog(
       `Account disconnected. You still need to manually revoke the API Token for:
   ${account}

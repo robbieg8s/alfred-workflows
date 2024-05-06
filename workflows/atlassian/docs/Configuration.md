@@ -35,18 +35,29 @@ the workflow will prompt you to connect an account also:
 
 ![The "No Atlassian Token" menu item](no-atlassian-token-menu.png)
 
-Actioning either item will commencing the token save flow. Three things will
-happen at this point:
+Actioning either item will commence the token save flow. This will display
+two dialogs in succession, to collect the email for the Atlassian Account, and
+to collect an API token for the Atlassian Account.
 
-1. Your default browser will be used to open the Atlassian Account API
-   Tokens management page.
-2. A description of the usage, something like _Halfyak Atlassian workflow
+![The "Connect Atlassian Account - Email" dialog](connect-account-email.png)
+
+Enter the email address associated with your Atlassian Account in the
+**Connect Atlassian Account - Email** workflow dialog shown above. At this
+point, your clipboard contents are not required, so you can copy and paste
+your email address from elsewhere if that is easier than typing it.
+
+Click **Confirm and Open Token Page** when you have entered your email. It will
+be validated, and if it looks ok, the next dialog will be presented.
+
+![The "Connect Atlassian Account - Token" dialog](connect-account-token.png)
+
+In addition to this dialog, the workflow will also
+
+1. Direct your default browser to open the Atlassian Account API Tokens
+   management page.
+2. Copy a description of the usage, something like _Halfyak Atlassian workflow
    for Alfred, user alice on Alice's Mac_, will be copied to your clipboard.
    This is intended be to be used as a token label.
-3. A dialog titled "Connect Atlassian Account " will be presented by the
-   workflow.
-
-![The "Connect Atlassian Account" dialog](connect-account-dialog.png)
 
 The intended flow at this point is
 
@@ -57,17 +68,12 @@ The intended flow at this point is
    edit it if you wish, or use a label of your own choosing. A label should
    make it easy to find where you are about to store the token, in case you
    need to regenerate it in the future.
-3. Enter the email address associated with your Atlassian Account in the
-   workflow dialog from item 3 above. At this point, your clipboard contents
-   are not required, so you can copy and paste your email address from
-   elsewhere if that is easier than typing it.
-4. Return to the **Create an API Token** dialog in the browser from step 2,
-   and click the **Create** button. The dialog title will become **Your new
-   API Token**. Click the **Copy** button in this dialog, and your API Token
-   will be copied to the macOS clipboard.
-5. Return to the workflow dialog from step 3, where you have already entered
-   the email address associated with your Atlassian Account, and click the
-   **I have copied the Token** button.
+3. Click the **Create** button in the **Create an API Token** dialog that is
+   raised in the browser. The dialog title will become **Your new API Token**.
+4. Click the **Copy** button in this dialog, and your API Token will be copied
+   to the macOS clipboard.
+5. Return to the **Connect Atlassian Account - Token** workflow dialog shown
+   above, and click the **Paste Token from Clipboard** button.
 
 If all goes well, you will see a large text notification that the connection
 was created, along with a reminder to check your clipboard history. The
@@ -78,9 +84,9 @@ saving the token.
 
 In case of problems, the workflow will attempt to provide help. For example,
 it performs some basic validation of the provided email address. It also
-inspects the clipboard after you click **I have copied the Token** to ensure
-that the token has the known prefix `ATATT` which current Atlassian API Tokens
-start with.
+inspects the clipboard after you click the **Paste Token from Clipboard**
+button to ensure that the token has the known prefix `ATATT` which current
+Atlassian API Tokens start with.
 
 ## Updating a token
 
@@ -89,7 +95,7 @@ that you have already configured, the workflow will warn you. It is
 impossible to recover the prior token if you overwrite it, so you are warned
 before taking this action:
 
-![The "Update Token?" dialog](update-token-dialog.png)
+![The "Connect Atlassian Account - Update Token?" dialog](connect-account-update.png)
 
 If you agree, a similar large text notification of the update, along with a
 reminder about the clipboard, is shown on your screen.
@@ -106,7 +112,7 @@ many accounts, but I have two configured - work and personal - and
 performance is acceptable.
 
 If you use multiple accounts, then ensure that the account you are
-configuring is signed into Atlassian Account when you create the API Token.
+configuring is signed in to Atlassian Account when you create the API Token.
 You can check the account by inspecting the avatar in the top right corner
 of the Atlassian Account page - hover over it or click on it to show the
 associated email. You can switch accounts there. If your browser supports

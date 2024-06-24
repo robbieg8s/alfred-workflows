@@ -2,10 +2,11 @@ import {
   AlfredRunScriptJson,
   displayDialogRepeat,
   openUrl,
+  readClipboard,
   runScript,
+  writeClipboard,
 } from "@halfyak/alfred-workflows-jxa";
 
-import { readClipboard, writeClipboard } from "../pasteboard.ts";
 import { createAccount, updateAccountToken } from "../security.ts";
 import { hostFromUrl, suggestedTokenLabel } from "../sundry.ts";
 import { atlassianApiTokens, helpAdd } from "../urls.ts";

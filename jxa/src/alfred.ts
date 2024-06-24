@@ -88,9 +88,9 @@ type RunScriptHandler = (
 /**
  * Runs a run script handler, JSONifying the output for Alfred.
  *
- * Errors are logged then rethrown, which will result in nonzero exit status
- * from osascript. Unfortunately Alfred does not terminate the workflow in this
- * case, subsequent workflow objects will need to be defensive.
+ * Errors are logged. Since Alfred does not terminate the workflow if we exit
+ * with nonzero status, rethrowing doesn't help. Instead, we return with no
+ * arg, but set the variable "error" to the message from the exception.
  */
 export const runScript = (
   handler: RunScriptHandler,
@@ -105,7 +105,9 @@ export const runScript = (
       if (error instanceof DetailedError) {
         error.details.forEach((detail) => console.log(detail));
       }
-      throw error;
+      return JSON.stringify({
+        alfredworkflow: { variables: { error: message } },
+      });
     }
   };
 };

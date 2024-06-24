@@ -1,16 +1,14 @@
 import {
   AlfredScriptFilterItem,
   createUserDateFormatter,
+  getEnvOrThrow,
+  nsDataUtf8ToString,
   scriptFilter,
+  stringToNSDataUtf8,
 } from "@halfyak/alfred-workflows-jxa";
 
 import { queryAccountToken, queryAllAccounts } from "../security.ts";
-import {
-  halfyakService,
-  nsDataUtf8ToString,
-  siteFromUrl,
-  stringToNSDataUtf8,
-} from "../sundry.ts";
+import { halfyakService, siteFromUrl } from "../sundry.ts";
 
 import activityQuery from "../activityQuery.graphql";
 import { connectItem, helpItem } from "../common-items.ts";
@@ -32,9 +30,7 @@ const createAtlassianTimestampParser = () => {
 };
 
 const getApiTimeout = () => {
-  const timeout = parseInt(
-    $.NSProcessInfo.processInfo.environment.valueForKey("API_TIMEOUT").js,
-  );
+  const timeout = parseInt(getEnvOrThrow("API_TIMEOUT"));
   return !Number.isNaN(timeout) ? timeout : 60;
 };
 

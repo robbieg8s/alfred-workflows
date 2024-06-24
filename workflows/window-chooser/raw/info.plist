@@ -8,11 +8,50 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>1EFE94BC-46DB-44A4-9B4E-A1B796BE9A53</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>63FF7948-A031-421C-B5FF-98FAC1B90BBC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5FC2101B-C4AE-4BFF-827D-AD3E7D510647</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>1EFE94BC-46DB-44A4-9B4E-A1B796BE9A53</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>63FF7948-A031-421C-B5FF-98FAC1B90BBC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B37B86DB-2580-40FD-B084-30CA9F7AA311</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B37B86DB-2580-40FD-B084-30CA9F7AA311</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BEC53EF1-BF6E-4EF9-B2DD-F16CD064F4C0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -54,6 +93,35 @@
 			<string>1EFE94BC-46DB-44A4-9B4E-A1B796BE9A53</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>BEC53EF1-BF6E-4EF9-B2DD-F16CD064F4C0</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -104,6 +172,55 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>valid</string>
+						<key>uid</key>
+						<string>647054F0-8D89-47DA-8B6F-6F38CE7624A2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>63FF7948-A031-421C-B5FF-98FAC1B90BBC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Internal Error: {var:error}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B37B86DB-2580-40FD-B084-30CA9F7AA311</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -120,6 +237,29 @@
 		<dict>
 			<key>xpos</key>
 			<real>110</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
+		<key>63FF7948-A031-421C-B5FF-98FAC1B90BBC</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>125</real>
+		</dict>
+		<key>B37B86DB-2580-40FD-B084-30CA9F7AA311</key>
+		<dict>
+			<key>xpos</key>
+			<real>735</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>BEC53EF1-BF6E-4EF9-B2DD-F16CD064F4C0</key>
+		<dict>
+			<key>note</key>
+			<string>Display Outcome</string>
+			<key>xpos</key>
+			<real>885</real>
 			<key>ypos</key>
 			<real>105</real>
 		</dict>

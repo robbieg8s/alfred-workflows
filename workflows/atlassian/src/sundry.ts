@@ -3,14 +3,10 @@
 
 // Athough CF and NS are toll-free bridge in Objective-C, they need a helping
 // hand for JXA - i found this trick on https://stackoverflow.com/a/35007108
+import { stringToNSDataUtf8 } from "@halfyak/alfred-workflows-jxa";
+
 ObjC.bindFunction("CFMakeCollectable", ["id", ["void *"]]);
 export const cf2ns = (cfThing: unknown) => $.CFMakeCollectable(cfThing);
-
-export const stringToNSDataUtf8 = (string: string) =>
-  $(string).dataUsingEncoding($.NSUTF8StringEncoding);
-
-export const nsDataUtf8ToString = (nsdata: unknown): string =>
-  $.NSString.alloc.initWithDataEncoding(nsdata, $.NSUTF8StringEncoding).js;
 
 /**
  * Create a CFData from a javascript string.

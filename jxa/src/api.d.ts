@@ -17,6 +17,13 @@ export type JxaPath = {
   readonly [jxaPathTag]: true;
 };
 
+/**
+ * A type which can be locally used to declare a bridge function return type using `as`.
+ */
+export type JxaBridged<T> = {
+  js: T;
+};
+
 declare global {
   // This is the namespace which the Objective-C bridge functions get bound into
   const $: any;

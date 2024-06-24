@@ -21,11 +21,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>77E97C69-083B-4EE0-8C51-9216C76E9319</key>
+		<key>6730DC77-2678-4120-B5A9-E110392CF4CA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>77E97C69-083B-4EE0-8C51-9216C76E9319</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -153,7 +166,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
+				<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -166,7 +179,32 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BDFB12C0-52E3-455F-A8AB-EA7A58453140</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>68FB8EA0-639E-4082-957D-3F168BEB9E37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>647054F0-8D89-47DA-8B6F-6F38CE7624A2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6730DC77-2678-4120-B5A9-E110392CF4CA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -408,6 +446,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>valid</string>
+						<key>uid</key>
+						<string>647054F0-8D89-47DA-8B6F-6F38CE7624A2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Internal Error: {var:error}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6730DC77-2678-4120-B5A9-E110392CF4CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -619,6 +706,13 @@ third party product and not a product offered by Atlassian.</string>
 			<key>ypos</key>
 			<real>700</real>
 		</dict>
+		<key>6730DC77-2678-4120-B5A9-E110392CF4CA</key>
+		<dict>
+			<key>xpos</key>
+			<real>950</real>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
 		<key>68FB8EA0-639E-4082-957D-3F168BEB9E37</key>
 		<dict>
 			<key>note</key>
@@ -651,7 +745,7 @@ third party product and not a product offered by Atlassian.</string>
 			<key>note</key>
 			<string>Check {var:action}</string>
 			<key>xpos</key>
-			<real>349</real>
+			<real>350</real>
 			<key>ypos</key>
 			<real>590</real>
 		</dict>
@@ -681,6 +775,13 @@ third party product and not a product offered by Atlassian.</string>
 			<real>600</real>
 			<key>ypos</key>
 			<real>550</real>
+		</dict>
+		<key>BDFB12C0-52E3-455F-A8AB-EA7A58453140</key>
+		<dict>
+			<key>xpos</key>
+			<real>830</real>
+			<key>ypos</key>
+			<real>420</real>
 		</dict>
 		<key>EEBF3B34-F579-406B-8AA6-58610D52B813</key>
 		<dict>

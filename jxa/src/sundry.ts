@@ -1,16 +1,5 @@
 import { JxaPath } from "./api.js";
 
-export const createUserDateFormatter = () => {
-  const dateFormatter = $.NSDateFormatter.alloc.init;
-  dateFormatter.dateFormat =
-    $.NSDateFormatter.dateFormatFromTemplateOptionsLocale(
-      "HmEdMMM",
-      0,
-      $.NSLocale.currentLocale,
-    );
-  return (nsDate: unknown) => dateFormatter.stringFromDate(nsDate).js;
-};
-
 export class DetailedError extends Error {
   constructor(
     message: string,
@@ -22,6 +11,33 @@ export class DetailedError extends Error {
 
 export const detailedError = (message: string, ...details: string[]) =>
   new DetailedError(message, details);
+
+export const getEnvOrThrow = (variable: string) => {
+  const value = $.NSProcessInfo.processInfo.environment.valueForKey(variable);
+  if (value.isNil()) {
+    throw detailedError(
+      `Failed to get required environment variable "${variable}"`,
+    );
+  } else {
+    return value.js;
+  }
+};
+export const stringToNSDataUtf8 = (string: string) =>
+  $(string).dataUsingEncoding($.NSUTF8StringEncoding);
+
+export const nsDataUtf8ToString = (nsdata: unknown): string =>
+  $.NSString.alloc.initWithDataEncoding(nsdata, $.NSUTF8StringEncoding).js;
+
+export const createUserDateFormatter = () => {
+  const dateFormatter = $.NSDateFormatter.alloc.init;
+  dateFormatter.dateFormat =
+    $.NSDateFormatter.dateFormatFromTemplateOptionsLocale(
+      "HmEdMMM",
+      0,
+      $.NSLocale.currentLocale,
+    );
+  return (nsDate: unknown) => dateFormatter.stringFromDate(nsDate).js;
+};
 
 interface DisplayDialogDetails<TButton> {
   defaultAnswer?: string;

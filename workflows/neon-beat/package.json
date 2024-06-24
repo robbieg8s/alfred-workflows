@@ -1,0 +1,19 @@
+{
+  "name": "@halfyak/alfred-workflows-neon-beat",
+  "version": "1.0.0",
+  "description": "A workflow to capture notes quickly",
+  "author": "Robbie gates",
+  "type": "module",
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@halfyak/alfred-workflows-jxa": "workspace:"
+  },
+  "devDependencies": {
+    "@halfyak/alfred-workflows-tools": "workspace:",
+    "typescript": "5.3.3"
+  }
+}

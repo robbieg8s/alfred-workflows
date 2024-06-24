@@ -59,6 +59,19 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
+  workflows/neon-beat:
+    dependencies:
+      '@halfyak/alfred-workflows-jxa':
+        specifier: 'workspace:'
+        version: link:../../jxa
+    devDependencies:
+      '@halfyak/alfred-workflows-tools':
+        specifier: 'workspace:'
+        version: link:../../tools
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
   workflows/safari-history:
     dependencies:
       '@halfyak/alfred-workflows-jxa':

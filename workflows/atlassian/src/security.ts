@@ -1,7 +1,10 @@
 // Helpers for the Security Framework
 // This is still specific to this workflow however, e.g. halfyakService
 
-import { detailedError } from "@halfyak/alfred-workflows-jxa";
+import {
+  detailedError,
+  nsDataUtf8ToString,
+} from "@halfyak/alfred-workflows-jxa";
 
 import {
   cf2ns,
@@ -9,7 +12,6 @@ import {
   cfString,
   createCFDictionary,
   halfyakService,
-  nsDataUtf8ToString,
 } from "./sundry.ts";
 
 ObjC.import("Security");

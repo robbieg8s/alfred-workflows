@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>org.halfyak.alfredapp.browser-tabs</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>76944A24-CF1A-45E4-BEE5-6B831AC75445</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BD39DC0-5CC3-4837-AB81-82258F8D9D37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Robbie Gates</string>
+	<key>description</key>
+	<string>Copy browser tab urls to the Clipboard</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Browser Tabs</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>`</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>browser-tabs.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Fetching browser tabs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>76944A24-CF1A-45E4-BEE5-6B831AC75445</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6BD39DC0-5CC3-4837-AB81-82258F8D9D37</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>This workflow provides a ` search which lets you choose a tab from a supported browser, and copies the tab location to the clipboard.
+
+The workflow shows browser tabs by title which can be filtered by typing as usual. The subtitle shows the host of the tab, plus brief help. Actioning an item places the url of the tab on the clipboard as plain text.
+
+Holding Command (⌘) while actioning the item removes the query string and fragment - i.e. everything after the `?` - from the url before copying it. Holding Option (⌥), aka Alt, while actioning the item removes just the fragment - i.e. everything after the `#` - from the url before copying it.</string>
+	<key>uidata</key>
+	<dict>
+		<key>6BD39DC0-5CC3-4837-AB81-82258F8D9D37</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
+		<key>76944A24-CF1A-45E4-BEE5-6B831AC75445</key>
+		<dict>
+			<key>note</key>
+			<string>Query Browser</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/robbieg8s/alfred-workflows/tree/main/workflows/browser-tabs</string>
+</dict>
+</plist>

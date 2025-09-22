@@ -27,6 +27,8 @@ interface AlfredScriptFilterItemBase {
  */
 export interface AlfredScriptFilterItem extends AlfredScriptFilterItemBase {
   title: string;
+  subtitle?: string;
+  valid?: boolean;
   match?: string;
   mods?: {
     // mod is not an arbitrary string, but since it can be a combo via `+` of

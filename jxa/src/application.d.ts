@@ -21,6 +21,7 @@ declare interface Application {
   displayDialog: (text: string, options: DialogInquiry) => DialogReply;
   set includeStandardAdditions(include: boolean);
   name: () => string;
+  running: () => boolean;
   systemInfo: () => SystemInformation;
   windows: () => Window[];
 }

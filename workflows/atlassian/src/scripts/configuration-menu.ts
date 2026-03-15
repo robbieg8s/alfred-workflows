@@ -17,7 +17,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       .map(
         ({ account, details: { enabled } }): AlfredScriptFilterItem => ({
           title: account,
-          subtitle: `${enabled ? "Disable" : "Enable"} this connection, hold ⌘ for disconnect.`,
+          subtitle: `${enabled ? "Disable" : "Enable"} this connection, hold ⌘ for disconnect, ⌥ to rotate token.`,
           arg: account,
           icon: { path: enabled ? "enabled.png" : "disabled.png" },
           // We don't need a match element - Alfred word splits the domains which is
@@ -27,6 +27,10 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
             cmd: {
               subtitle: "Disconnect this account.",
               variables: { action: "disconnect" },
+            },
+            alt: {
+              subtitle: "Rotate token for this account.",
+              variables: { action: "rotate" },
             },
           },
         }),

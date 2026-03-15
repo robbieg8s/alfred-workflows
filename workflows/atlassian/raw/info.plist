@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>51ABC51F-821B-4D6C-85F3-A05FFC52FE38</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6730DC77-2678-4120-B5A9-E110392CF4CA</key>
 		<array>
 			<dict>
@@ -133,6 +146,18 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>51ABC51F-821B-4D6C-85F3-A05FFC52FE38</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8FFC6C18-9EA0-4D9A-AD6C-72B3E3A00B44</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -254,7 +279,7 @@
 						<key>inputstring</key>
 						<string>{var:action}</string>
 						<key>matchcasesensitive</key>
-						<true/>
+						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
@@ -524,7 +549,7 @@
 						<key>inputstring</key>
 						<string>{var:action}</string>
 						<key>matchcasesensitive</key>
-						<true/>
+						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
@@ -561,6 +586,20 @@
 						<string>disconnect</string>
 						<key>uid</key>
 						<string>3BCB2ADB-EEF5-42C8-8E3D-B5CC28839F60</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>rotate</string>
+						<key>outputlabel</key>
+						<string>rotate</string>
+						<key>uid</key>
+						<string>8FFC6C18-9EA0-4D9A-AD6C-72B3E3A00B44</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
@@ -641,6 +680,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>rotate-account.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>51ABC51F-821B-4D6C-85F3-A05FFC52FE38</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -697,6 +759,15 @@ third party product and not a product offered by Atlassian.</string>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
+		<key>51ABC51F-821B-4D6C-85F3-A05FFC52FE38</key>
+		<dict>
+			<key>note</key>
+			<string>Disconnect Account</string>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>700</real>
+		</dict>
 		<key>60614954-C1F1-461C-8651-DE2C1EB6EEEC</key>
 		<dict>
 			<key>note</key>
@@ -704,14 +775,14 @@ third party product and not a product offered by Atlassian.</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>850</real>
 		</dict>
 		<key>6730DC77-2678-4120-B5A9-E110392CF4CA</key>
 		<dict>
 			<key>xpos</key>
 			<real>950</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>495</real>
 		</dict>
 		<key>68FB8EA0-639E-4082-957D-3F168BEB9E37</key>
 		<dict>

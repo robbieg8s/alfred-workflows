@@ -213,8 +213,10 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       // We want to merge the data from all the requests
       const accountDataEntries = Array.from(dataByAccount.entries());
       const renderedActivityItems = accountDataEntries
-        .flatMap(([account, data]) =>
-          data.activity.myActivity.all.edges
+        .map(([account, data]) => [account, data.activity.myActivity])
+        .filter(([_, myActivity]) => myActivity)
+        .flatMap(([account, myActivity]) =>
+          myActivity.all.edges
             .map(
               // Unpack the GraphQL
               ({

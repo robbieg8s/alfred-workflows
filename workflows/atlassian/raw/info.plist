@@ -163,6 +163,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>FF913CB5-37D1-40ED-8C89-A4961C48B135</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>99A1F606-1BCE-4F35-882E-568E923BFAC9</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>60614954-C1F1-461C-8651-DE2C1EB6EEEC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -230,6 +242,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6730DC77-2678-4120-B5A9-E110392CF4CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FF913CB5-37D1-40ED-8C89-A4961C48B135</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDFB12C0-52E3-455F-A8AB-EA7A58453140</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -609,6 +634,20 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
+						<string>cloudId</string>
+						<key>outputlabel</key>
+						<string>cloudId</string>
+						<key>uid</key>
+						<string>99A1F606-1BCE-4F35-882E-568E923BFAC9</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
 						<string>help</string>
 						<key>outputlabel</key>
 						<string>help</string>
@@ -703,6 +742,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>update-cloud-id.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FF913CB5-37D1-40ED-8C89-A4961C48B135</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -762,7 +824,7 @@ third party product and not a product offered by Atlassian.</string>
 		<key>51ABC51F-821B-4D6C-85F3-A05FFC52FE38</key>
 		<dict>
 			<key>note</key>
-			<string>Disconnect Account</string>
+			<string>Rotate Account</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
@@ -775,7 +837,7 @@ third party product and not a product offered by Atlassian.</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>1000</real>
 		</dict>
 		<key>6730DC77-2678-4120-B5A9-E110392CF4CA</key>
 		<dict>
@@ -862,6 +924,15 @@ third party product and not a product offered by Atlassian.</string>
 			<real>600</real>
 			<key>ypos</key>
 			<real>100</real>
+		</dict>
+		<key>FF913CB5-37D1-40ED-8C89-A4961C48B135</key>
+		<dict>
+			<key>note</key>
+			<string>Update Cloud Id</string>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>850</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

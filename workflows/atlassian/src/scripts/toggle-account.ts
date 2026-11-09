@@ -16,7 +16,7 @@ run = runScript((account): AlfredRunScriptJson => {
     throw detailedError(`Account ${account} now missing?`);
   } else {
     // Toggle enabled
-    const enabled = accountItem.details.enabled ? false : true;
+    const enabled = !accountItem.details.enabled;
     accountItem.details.enabled = enabled;
     updateAccountDetails(accountItem);
     const actionTaken = enabled ? "Enabled" : "Disabled";

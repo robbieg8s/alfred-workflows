@@ -14,25 +14,34 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       // Sort by account name. This is using localeCompare for convenience, due
       // to the lack of String.compare.
       .toSorted((left, right) => left.account.localeCompare(right.account))
-      .map(({ account, details: { enabled } }): AlfredScriptFilterItem => ({
-        title: account,
-        subtitle: `${enabled ? "Disable" : "Enable"} this connection, hold ⌘ for disconnect, ⌥ to rotate token.`,
-        arg: account,
-        icon: { path: enabled ? "enabled.png" : "disabled.png" },
-        // We don't need a match element - Alfred word splits the domains which is
-        // the way i want to match in practice.
-        variables: { action: "toggle" },
-        mods: {
-          cmd: {
-            subtitle: "Disconnect this account.",
-            variables: { action: "disconnect" },
+      .map(
+        ({
+          account,
+          details: { enabled, sites },
+        }): AlfredScriptFilterItem => ({
+          title: account,
+          subtitle: `${enabled ? "Disable" : "Enable"} this connection, hold ⌘ for disconnect, ⌥ to rotate token, ^ to ${sites ? "update" : "set"} cloudId.`,
+          arg: account,
+          icon: { path: enabled ? "enabled.png" : "disabled.png" },
+          // We don't need a match element - Alfred word splits the domains which is
+          // the way i want to match in practice.
+          variables: { action: "toggle" },
+          mods: {
+            cmd: {
+              subtitle: "Disconnect this account.",
+              variables: { action: "disconnect" },
+            },
+            alt: {
+              subtitle: "Rotate token for this account.",
+              variables: { action: "rotate" },
+            },
+            ctrl: {
+              subtitle: `${sites ? "Update" : "Set"} cloudId for this account.`,
+              variables: { action: "cloudId" },
+            },
           },
-          alt: {
-            subtitle: "Rotate token for this account.",
-            variables: { action: "rotate" },
-          },
-        },
-      })),
+        }),
+      ),
     helpItem,
   ];
 });

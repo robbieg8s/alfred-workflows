@@ -71,69 +71,81 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       const dataByAccount = new Map();
       const errorByAccount = new Map();
 
-      const dataTasks = enabledAccountItems.map(({ account }) => {
-        const authorization = stringToNSDataUtf8(
-          `${account}:${queryAccountToken(account)}`,
-        ).base64EncodedStringWithOptions(0).js;
-        const urlRequest = $.NSMutableURLRequest.alloc.init;
-        urlRequest.HTTPMethod = "POST";
-        urlRequest.URL = $.NSURL.URLWithString(
-          "https://api.atlassian.com/graphql",
-        );
-        const setHeader = (field: string, value: string) =>
-          urlRequest.setValueForHTTPHeaderField(value, field);
-        setHeader("content-type", "application/json");
-        setHeader("user-agent", `${halfyakService}/robbie@halfyak.org`);
-        setHeader("authorization", `Basic ${authorization}`);
-        const body = {
-          query: activityQuery,
-          variables: { productFilter: ["jira", "confluence"] },
-        };
-        urlRequest.HTTPBody = stringToNSDataUtf8(JSON.stringify(body));
+      const dataTasks = enabledAccountItems.map(
+        ({ account, details: { sites } }) => {
+          const authorization = stringToNSDataUtf8(
+            `${account}:${queryAccountToken(account)}`,
+          ).base64EncodedStringWithOptions(0).js;
+          const urlRequest = $.NSMutableURLRequest.alloc.init;
+          urlRequest.HTTPMethod = "POST";
+          urlRequest.URL = $.NSURL.URLWithString(
+            "https://api.atlassian.com/graphql",
+          );
+          const setHeader = (field: string, value: string) =>
+            urlRequest.setValueForHTTPHeaderField(value, field);
+          setHeader("content-type", "application/json");
+          setHeader("user-agent", `${halfyakService}/robbie@halfyak.org`);
+          setHeader("authorization", `Basic ${authorization}`);
+          const body = {
+            query: activityQuery,
+            variables: {
+              rootContainerIds: sites?.map(
+                (site) => `ari:cloud:platform::site/${site.cloudId}`,
+              ),
+              productFilter: ["jira", "confluence"],
+            },
+          };
+          urlRequest.HTTPBody = stringToNSDataUtf8(JSON.stringify(body));
 
-        return urlSession.dataTaskWithRequestCompletionHandler(
-          urlRequest,
-          // @ts-expect-error This is a JXA callback, i've not typed them yet
-          (data, response, error) => {
-            // We only report one error per account, so try to report the most
-            // specific. This means we set the least specific first - start with
-            // macOS errors, then HTTP by status code, and finally GraphQL.
-            if (undefined !== error.js) {
-              errorByAccount.set(
-                account,
-                `(${error.code}): ${error.localizedDescription.js}`,
-              );
-            }
-            if (undefined !== data.js) {
-              const jsonData = JSON.parse(nsDataUtf8ToString(data));
-              const { statusCode } = response;
-              if (200 != statusCode) {
-                console.log(JSON.stringify(jsonData, null, 2));
-                // There doesn't appear to be complete consistency in which
-                // field is filled in here, it depends on which bit of Atlassian
-                // cloud rejects the request.
-                const { message, error } = jsonData;
-                const reportable =
-                  message ??
-                  error ??
-                  $.NSHTTPURLResponse.localizedStringForStatusCode(statusCode);
+          return urlSession.dataTaskWithRequestCompletionHandler(
+            urlRequest,
+            // @ts-expect-error This is a JXA callback, i've not typed them yet
+            (data, response, error) => {
+              // We only report one error per account, so try to report the most
+              // specific. This means we set the least specific first - start with
+              // macOS errors, then HTTP by status code, and finally GraphQL.
+              if (undefined !== error.js) {
                 errorByAccount.set(
                   account,
-                  `HTTP Status ${statusCode}: ${reportable}`,
+                  `(${error.code}): ${error.localizedDescription.js}`,
                 );
-              } else {
-                const { errors, data } = jsonData;
-                if (undefined !== errors) {
-                  errorByAccount.set(account, `GraphQL: ${errors[0].message}`);
-                }
-                if (undefined !== data) {
-                  dataByAccount.set(account, data);
+              }
+              if (undefined !== data.js) {
+                const jsonData = JSON.parse(nsDataUtf8ToString(data));
+                const { statusCode } = response;
+                if (200 != statusCode) {
+                  console.log(JSON.stringify(jsonData, null, 2));
+                  // There doesn't appear to be complete consistency in which
+                  // field is filled in here, it depends on which bit of Atlassian
+                  // cloud rejects the request.
+                  const { message, error } = jsonData;
+                  const reportable =
+                    message ??
+                    error ??
+                    $.NSHTTPURLResponse.localizedStringForStatusCode(
+                      statusCode,
+                    );
+                  errorByAccount.set(
+                    account,
+                    `HTTP Status ${statusCode}: ${reportable}`,
+                  );
+                } else {
+                  const { errors, data } = jsonData;
+                  if (undefined !== errors) {
+                    errorByAccount.set(
+                      account,
+                      `GraphQL: ${errors[0].message}`,
+                    );
+                  }
+                  if (undefined !== data) {
+                    dataByAccount.set(account, data);
+                  }
                 }
               }
-            }
-          },
-        );
-      });
+            },
+          );
+        },
+      );
       dataTasks.map((dataTask) => dataTask.resume);
       // While NSOperationQueue.waitUntilAllOperationsAreFinished looks
       // attractive, it's no good here because there are no operations until the

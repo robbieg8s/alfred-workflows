@@ -33,10 +33,15 @@ const securityError = (
   );
 };
 
-interface AccountItem {
+export interface AccountCloudInfo {
+  cloudId: string;
+}
+
+export interface AccountItem {
   account: string;
   details: {
     enabled: boolean;
+    sites?: AccountCloudInfo[];
   };
 }
 

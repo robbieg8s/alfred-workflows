@@ -46,6 +46,7 @@ Atlassian Account Email:`;
       // for this case.
       // The trim here is a concession to how easy it is to scoop up whitespace
       // when copy/pasting.
+      // This code is (roughly) duplicated in showCloudIdDialog
       const account = (response?.textReturned ?? "").trim();
       details.defaultAnswer = account;
       // Note response is undefined when cancelled, the form of the conditions

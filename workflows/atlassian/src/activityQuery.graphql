@@ -1,7 +1,13 @@
-query activityQuery($productFilter: [String!]) {
+query activityQuery($rootContainerIds: [ID!], $productFilter: [String!]) {
   activity {
     myActivity {
-      all(first: 100, filter: { arguments: { products: $productFilter } }) {
+      all(
+        first: 100
+        filter: {
+          rootContainerIds: $rootContainerIds
+          arguments: { products: $productFilter }
+        }
+      ) {
         edges {
           node {
             event {

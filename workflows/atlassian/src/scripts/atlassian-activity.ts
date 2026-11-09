@@ -226,7 +226,7 @@ run = scriptFilter((): AlfredScriptFilterItem[] => {
       const accountDataEntries = Array.from(dataByAccount.entries());
       const renderedActivityItems = accountDataEntries
         .map(([account, data]) => [account, data.activity.myActivity])
-        .filter(([_, myActivity]) => myActivity)
+        .filter(([, myActivity]) => myActivity)
         .flatMap(([account, myActivity]) =>
           myActivity.all.edges
             .map(
